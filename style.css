@@ -34,3 +34,5 @@ footer nav a{margin-right:16px;display:inline-block;min-height:44px;line-height:
 .brand{display:inline-flex;align-items:flex-start;text-decoration:none;color:var(--text)}
 .brand img{display:block;width:240px;max-width:70vw;height:auto}
 .brand .tm{font-size:11px;font-weight:600;margin-left:2px;line-height:1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .safety{padding-left:0;padding-right:0}}
+:root[data-theme="dark"] .safety{padding-left:0;padding-right:0}
