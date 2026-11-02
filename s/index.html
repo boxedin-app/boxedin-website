@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-02-2026"></head><body class="scan"><div class="wrap">
+<header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
+<div class="langs"><button type="button" data-switch="es" data-lang="en">Español</button><button type="button" data-switch="en" data-lang="es" hidden>English</button></div></header>
+<span data-title-en="BoxedIn" data-title-es="BoxedIn" hidden></span>
+<main>
+<section id="v-loading"><p class="muted">&nbsp;</p></section>
+
+<section id="v-landing" hidden>
+<div data-lang="en"><h1 class="oz">Boxed in by this car?</h1>
+<p class="lead">The owner gets an instant, private alert. No app, no account needed.</p></div>
+<div data-lang="es" hidden><h1 class="oz">¿Este carro le tiene bloqueado?</h1>
+<p class="lead">El dueño recibe un aviso privado al instante. No necesita la app ni una cuenta.</p></div>
+<div class="card"><div class="tag" data-lang="en">This car</div><div class="tag" data-lang="es" hidden>Este carro</div><div class="car" id="car"></div></div>
+<button class="btn-orange" type="button" id="go-courtesy"><span data-lang="en">You're blocking me in,<br>please move your car.</span><span data-lang="es" hidden>Me tiene bloqueado, por favor<br>mueva su carro.</span></button>
+</section>
+
+<section id="v-courtesy" hidden>
+<div data-lang="en"><h1 class="oz">One quick promise.</h1>
+<p class="lead">The owner never sees your name or number, and you never see theirs.</p>
+<div class="card"><p style="margin:0;font-weight:600">Keep it friendly. Wait by your car, not theirs.</p></div>
+<p class="small">By tapping, you agree to BoxedIn's <a href="/terms.html">Terms and Community Guidelines</a>. If anyone is in danger, call 911.</p></div>
+<div data-lang="es" hidden><h1 class="oz">Una promesa rápida.</h1>
+<p class="lead">El dueño nunca ve su nombre ni su número, y usted nunca ve los suyos.</p>
+<div class="card"><p style="margin:0;font-weight:600">Sea amable. Espere junto a su propio carro, no junto al carro de la otra persona.</p></div>
+<p class="small">Al tocar, usted acepta los <a href="/terms.html">Términos y las Normas de la Comunidad</a> de BoxedIn. Si alguien está en peligro, llame al 911.</p></div>
+<button class="btn-orange" type="button" id="send"><span data-lang="en">I'll keep it courteous. Send alert.</span><span data-lang="es" hidden>Seré amable. Enviar alerta.</span></button>
+</section>
+
+<section id="v-inactive" hidden>
+<div data-lang="en"><h1 class="oz">We can't reach this car's owner right now.</h1>
+<p class="lead">Don't wait on this one. For a blocked car, you can call 311. If you feel in danger, call 911.</p>
+<a class="btn-orange" href="/">Get your own sticker</a></div>
+<div data-lang="es" hidden><h1 class="oz">No podemos comunicarnos con el dueño de este carro ahora mismo.</h1>
+<p class="lead">No espere por este. Si un carro le bloquea, puede llamar al 311. Si se siente en peligro, llame al 911.</p>
+<a class="btn-orange" href="/?lang=es">Obtenga su propia calcomanía</a></div>
+</section>
+</main>
+<footer><nav><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/refunds.html">Refunds &amp; Cancellation</a><a href="/contact.html">Contact</a></nav>
+<p>&copy; 2026 BoxedIn LLC, a New York limited liability company. Questions: <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</p><p>BoxedIn is a trademark of BoxedIn LLC.</p></footer>
+</div>
+<div class="safetybar"><a href="tel:911"><span data-lang="en">In danger, threatened, or harassed? Call 911.</span><span data-lang="es" hidden>¿En peligro, amenazado o acosado? Llame al 911.</span></a></div>
+<script src="/site.js?v=11-02-2026"></script>
+<script>var lang=BoxedIn.initLang();
+(function(){
+  var ES={black:"negro",white:"blanco",silver:"plateado",gray:"gris",grey:"gris",red:"rojo",blue:"azul",green:"verde",brown:"marrón",beige:"beige",gold:"dorado",yellow:"amarillo",orange:"anaranjado",purple:"morado",tan:"beige"};
+  function show(id){["v-loading","v-landing","v-courtesy","v-inactive"].forEach(function(v){document.getElementById(v).hidden=(v!==id);});window.scrollTo(0,0);}
+  var m=location.pathname.match(/^\/s\/([A-Za-z0-9]{6,16})\/?$/);
+  if(!m){show("v-inactive");return;}
+  var code=m[1].toUpperCase();
+  fetch(BoxedIn.API+"/functions/v1/scan?code="+encodeURIComponent(code),{headers:{apikey:BoxedIn.KEY}})
+   .then(function(r){return r.ok?r.json():null;})
+   .then(function(d){
+     if(!d||d.status!=="active"){show("v-inactive");return;}
+     var en=[d.make,d.model].filter(Boolean).join(" ");
+     var c=document.getElementById("car");
+     function label(){var l=document.documentElement.lang; var col=(d.color||""); var colEs=ES[col.toLowerCase()]||col; c.textContent=en+(col?" · "+(l==="es"?colEs:col):"");}
+     label(); document.querySelectorAll("[data-switch]").forEach(function(b){b.addEventListener("click",label);});
+     show("v-landing");
+     document.getElementById("go-courtesy").onclick=function(){show("v-courtesy");};
+     // Sending the alert is build step 6. Until then (and whenever sending fails), the scanner sees the inactive screen, never an error.
+     document.getElementById("send").onclick=function(){
+       fetch(BoxedIn.API+"/functions/v1/scan",{method:"POST",headers:{apikey:BoxedIn.KEY,"Content-Type":"application/json"},body:JSON.stringify({action:"send",code:code})})
+        .then(function(r){return r.ok?r.json():null;}).then(function(x){if(!x||!x.ok)show("v-inactive");}).catch(function(){show("v-inactive");});
+     };
+   }).catch(function(){show("v-inactive");});
+})();</script>
+</body></html>
