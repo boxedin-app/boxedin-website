@@ -39,5 +39,17 @@ window.BoxedIn = (function () {
       }).catch(function () {});
   }
 
-  return { API: API, KEY: KEY, initLang: initLang, applyLang: applyLang, foundingSpots: foundingSpots };
+  // "[X] waived setups left": real count from the database only; hidden if it can't load or X = 0.
+  function waivedSetups() {
+    fetch(API + "/rest/v1/rpc/setup_waiver_status", { method: "POST", headers: { apikey: KEY, "Content-Type": "application/json" }, body: "{}" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (rows) {
+        var row = Array.isArray(rows) ? rows[0] : rows;
+        if (!row || typeof row.waivers_left !== "number" || row.waivers_left <= 0) return;
+        document.getElementById("waivers-n").textContent = row.waivers_left;
+        document.getElementById("waivers").hidden = false;
+      }).catch(function () {});
+  }
+
+  return { API: API, KEY: KEY, initLang: initLang, applyLang: applyLang, foundingSpots: foundingSpots, waivedSetups: waivedSetups };
 })();
