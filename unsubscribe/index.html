@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unsubscribe | BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-02-2026"></head><body class=""><div class="wrap">
+<header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
+<div class="langs"><button type="button" data-switch="es" data-lang="en">Español</button><button type="button" data-switch="en" data-lang="es" hidden>English</button></div></header>
+<span data-title-en="Unsubscribe | BoxedIn" data-title-es="Cancelar suscripción | BoxedIn" hidden></span>
+<main>
+<div data-lang="en">
+<div class="u-ask"><h1 class="oz">Stop these emails?</h1>
+<p><button type="button" class="btn u-go" style="border:0;cursor:pointer;font:inherit;font-weight:600">Unsubscribe</button></p></div>
+<div class="u-done" hidden><h1 class="oz">You're unsubscribed.</h1><p class="lead">You won't get emails like this from BoxedIn again.</p></div>
+<div class="u-fail" hidden><h1 class="oz">This link didn't work.</h1><p>Email <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a> and we'll take you off the list.</p></div>
+</div>
+<div data-lang="es" hidden>
+<div class="u-ask"><h1 class="oz">¿Dejar de recibir estos correos?</h1>
+<p><button type="button" class="btn u-go" style="border:0;cursor:pointer;font:inherit;font-weight:600">Cancelar suscripción</button></p></div>
+<div class="u-done" hidden><h1 class="oz">Su suscripción fue cancelada.</h1><p class="lead">No volverá a recibir correos como este de BoxedIn.</p></div>
+<div class="u-fail" hidden><h1 class="oz">Este enlace no funcionó.</h1><p>Escriba a <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a> y lo quitaremos de la lista.</p></div>
+</div>
+</main>
+<footer><nav><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/refunds.html">Refunds &amp; Cancellation</a><a href="/contact.html">Contact</a></nav>
+<p>&copy; 2026 BoxedIn LLC, a New York limited liability company. Questions: <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</p><p>BoxedIn is a trademark of BoxedIn LLC.</p></footer>
+</div>
+<script src="/site.js?v=11-02-2026"></script>
+<script>
+BoxedIn.initLang();
+// The person presses the button (a link scanner opening the page never unsubscribes anyone).
+(function () {
+  var t = new URLSearchParams(location.search).get("t") || "";
+  function show(cls) {
+    document.querySelectorAll(".u-ask,.u-done,.u-fail").forEach(function (el) { el.hidden = !el.classList.contains(cls); });
+  }
+  if (!/^[A-Za-z0-9_-]+\.[0-9a-f]{64}$/.test(t)) { show("u-fail"); return; }
+  document.querySelectorAll(".u-go").forEach(function (b) {
+    b.addEventListener("click", function () {
+      b.disabled = true;
+      fetch(BoxedIn.API + "/functions/v1/emails", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "unsubscribe", token: t }) })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { show(j && j.ok ? "u-done" : "u-fail"); })
+        .catch(function () { show("u-fail"); });
+    });
+  });
+})();
+</script>
+</body></html>
