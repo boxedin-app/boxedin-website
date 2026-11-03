@@ -50,3 +50,40 @@ ol.steps{padding-left:24px;margin:20px 0}ol.steps li{margin:8px 0}
 .safetybar{position:fixed;left:0;right:0;bottom:0;background:#14161A;color:#F7F4EF;padding:14px 16px calc(14px + env(safe-area-inset-bottom));text-align:center;font-weight:600;z-index:10;border-top:1px solid #343740}
 .safetybar a{color:#F7F4EF}
 [hidden]{display:none!important}
+
+/* 11-02-2026: more breathing room on the scan pages (Wanda) */
+.scan h1.oz{margin:12px 0 24px}
+.scan .lead{margin:0 0 32px;line-height:1.6}
+.scan .card{margin:28px 0 32px}
+.scan .small{margin:24px 0 28px}
+.scan .btn-orange,.scan .btn-outline{margin-top:8px}
+
+/* 11-02-2026: breathing room on every page (Wanda: "make sure none of the sections are crammed") */
+h1.oz{margin:12px 0 24px}
+h2.oz{margin:56px 0 18px}
+h3{margin:36px 0 12px}
+.lead{margin:0 0 24px;line-height:1.6}
+p{margin:0 0 16px}
+.card{padding:26px 24px;margin:32px 0}
+.card>*:last-child{margin-bottom:0}
+.card p{margin:0 0 14px}
+.tag{margin-bottom:12px}
+.price{margin:4px 0 12px}
+.facts{margin:24px 0 16px}
+ol.steps{margin:28px 0 32px}ol.steps li{margin:0 0 14px;line-height:1.55}
+ul{margin:16px 0 24px}li{margin:0 0 10px}
+table{margin:20px 0 28px}
+.btn,.btn-orange,.btn-outline{margin-top:8px}
+.safety{margin-top:36px}
+footer{margin-top:64px}
+footer p{margin:0 0 12px}
+/* 11-02-2026 step 6: live alert screens */
+ol.track{list-style:none;padding:0;margin:0}ol.track li{padding:10px 0 10px 30px;position:relative;color:var(--secondary);margin:0;border-bottom:1px solid var(--hairline)}
+ol.track li:last-child{border-bottom:0}ol.track li::before{content:"";position:absolute;left:4px;top:15px;width:12px;height:12px;border-radius:50%;border:2px solid var(--secondary)}
+ol.track li.done{color:var(--text)}ol.track li.done::before{background:var(--orange);border-color:var(--orange)}
+ol.track .when{color:var(--secondary);font-size:14px;margin-left:6px}
+#cancel{margin:4px 0 40px}.outbox{margin-top:8px}.center{text-align:center}
+
+/* 11-02-2026: keep opposite actions apart, and the thank-you away from the sign-up button */
+#v-thanks #thank{margin-bottom:8px}#v-thanks #thanked{margin-top:8px}
+#v-thanks .sticker-cta{margin-top:48px}

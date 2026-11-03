@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-02-2026"></head><body class="scan"><div class="wrap">
+<title>BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-02-2026e"></head><body class="scan"><div class="wrap">
 <header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
 <div class="langs"><button type="button" data-switch="es" data-lang="en">Español</button><button type="button" data-switch="en" data-lang="es" hidden>English</button></div></header>
 <span data-title-en="BoxedIn" data-title-es="BoxedIn" hidden></span>
@@ -12,7 +12,7 @@
 <div data-lang="es" hidden><h1 class="oz">¿Este carro le tiene bloqueado?</h1>
 <p class="lead">El dueño recibe un aviso privado al instante. No necesita la app ni una cuenta.</p></div>
 <div class="card"><div class="tag" data-lang="en">This car</div><div class="tag" data-lang="es" hidden>Este carro</div><div class="car" id="car"></div></div>
-<button class="btn-orange" type="button" id="go-courtesy"><span data-lang="en">You're blocking me in,<br>please move your car.</span><span data-lang="es" hidden>Me tiene bloqueado, por favor<br>mueva su carro.</span></button>
+<button class="btn-orange" type="button" id="go-courtesy"><span data-lang="en">You've got me boxed in.<br>Please move your car.</span><span data-lang="es" hidden>Me tiene bloqueado, por favor<br>mueva su carro.</span></button>
 </section>
 
 <section id="v-courtesy" hidden>
@@ -29,11 +29,42 @@
 
 <section id="v-inactive" hidden>
 <div data-lang="en"><h1 class="oz">We can't reach this car's owner right now.</h1>
-<p class="lead">Don't wait on this one. For a blocked car, you can call 311. If you feel in danger, call 911.</p>
+<p class="lead">Don't wait on this one. If you're boxed in, you can call 311. If you feel in danger, call 911.</p>
 <a class="btn-orange" href="/">Get your own sticker</a></div>
 <div data-lang="es" hidden><h1 class="oz">No podemos comunicarnos con el dueño de este carro ahora mismo.</h1>
 <p class="lead">No espere por este. Si un carro le bloquea, puede llamar al 311. Si se siente en peligro, llame al 911.</p>
 <a class="btn-orange" href="/?lang=es">Obtenga su propia calcomanía</a></div>
+</section>
+
+<section id="v-alert" hidden>
+<div data-lang="en"><h1 class="oz" data-h="waiting">Alert sent.</h1><h1 class="oz" data-h="replied" hidden>The owner replied.</h1><h1 class="oz" data-h="moved" hidden>Your way is clear.</h1></div>
+<div data-lang="es" hidden><h1 class="oz" data-h="waiting">Alerta enviada.</h1><h1 class="oz" data-h="replied" hidden>El dueño respondió.</h1><h1 class="oz" data-h="moved" hidden>Tiene el camino libre.</h1></div>
+<p class="lead" id="a-stay"><span data-lang="en">Stay here. We'll show the owner's reply the moment it comes in.</span><span data-lang="es" hidden>Quédese aquí. Le mostraremos la respuesta del dueño en cuanto llegue.</span></p>
+<p class="lead" id="a-moved" hidden><span data-lang="en">The owner says they've moved. Tap "I'm out" once you're free.</span><span data-lang="es" hidden>El dueño dice que ya movió el carro. Toque "Ya salí" cuando pueda salir.</span></p>
+<div class="card"><ol class="track">
+<li class="done"><span data-lang="en">Alert sent</span><span data-lang="es" hidden>Alerta enviada</span> <span class="when" id="t-sent"></span></li>
+<li id="s-deliv"><span data-st="off"><span data-lang="en">Delivering…</span><span data-lang="es" hidden>Entregando…</span></span><span data-st="on" hidden><span data-lang="en">Alert delivered</span><span data-lang="es" hidden>Alerta entregada</span></span> <span class="when" id="t-deliv"></span></li>
+<li id="s-reply"><span data-st="off"><span data-lang="en">Waiting for the owner's reply</span><span data-lang="es" hidden>Esperando la respuesta del dueño</span></span><span data-st="on" hidden><span data-lang="en">Owner replied:</span><span data-lang="es" hidden>El dueño respondió:</span> <strong id="reply-text"></strong></span></li>
+</ol></div>
+<button class="btn-outline" type="button" id="cancel" hidden><span data-lang="en">Cancel alert</span><span data-lang="es" hidden>Cancelar alerta</span> <span id="cancel-left"></span></button>
+<div class="outbox"><button class="btn-orange" type="button" id="out"><span data-lang="en">I'm out</span><span data-lang="es" hidden>Ya salí</span></button>
+<p class="small muted center"><span data-lang="en">Got out? Tap "I'm out" so we can close this alert. It helps us make BoxedIn faster for every neighbor.</span><span data-lang="es" hidden>¿Ya salió? Toque "Ya salí" para cerrar esta alerta. Nos ayuda a que BoxedIn sea más rápido para todos.</span></p></div>
+</section>
+
+<section id="v-thanks" hidden>
+<div data-lang="en"><h1 class="oz">Thanks, neighbor.</h1><p class="lead">That's one less honk in New York City.</p></div>
+<div data-lang="es" hidden><h1 class="oz">Gracias, vecino.</h1><p class="lead">Un bocinazo menos en la ciudad de Nueva York.</p></div>
+<button class="btn-outline" type="button" id="thank"><span data-lang="en">Send the owner a thank-you</span><span data-lang="es" hidden>Enviarle las gracias al dueño</span></button>
+<p class="lead" id="thanked" hidden><strong><span data-lang="en">Sent. The owner will see your thanks.</span><span data-lang="es" hidden>Enviado. El dueño verá su agradecimiento.</span></strong></p>
+<p class="sticker-cta"><a class="btn-orange" href="/"><span data-lang="en">Get your own sticker</span><span data-lang="es" hidden>Obtenga su propia calcomanía</span></a></p>
+</section>
+
+<section id="v-ended" hidden>
+<div id="e-canceled"><div data-lang="en"><h1 class="oz">Alert canceled.</h1><p class="lead">We told the owner never mind.</p></div>
+<div data-lang="es" hidden><h1 class="oz">Alerta cancelada.</h1><p class="lead">Le avisamos al dueño que ya no hace falta.</p></div></div>
+<div id="e-closed" hidden><div data-lang="en"><h1 class="oz">Alert closed.</h1><p class="lead">This alert closed on its own after 2 hours.</p></div>
+<div data-lang="es" hidden><h1 class="oz">Alerta cerrada.</h1><p class="lead">Esta alerta se cerró sola después de 2 horas.</p></div></div>
+<button class="btn-outline" type="button" id="restart" style="margin-top:20px"><span data-lang="en">Back to start</span><span data-lang="es" hidden>Volver al inicio</span></button>
 </section>
 </main>
 <footer><nav><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/refunds.html">Refunds &amp; Cancellation</a><a href="/contact.html">Contact</a></nav>
@@ -44,25 +75,77 @@
 <script>var lang=BoxedIn.initLang();
 (function(){
   var ES={black:"negro",white:"blanco",silver:"plateado",gray:"gris",grey:"gris",red:"rojo",blue:"azul",green:"verde",brown:"marrón",beige:"beige",gold:"dorado",yellow:"amarillo",orange:"anaranjado",purple:"morado",tan:"beige"};
-  function show(id){["v-loading","v-landing","v-courtesy","v-inactive"].forEach(function(v){document.getElementById(v).hidden=(v!==id);});window.scrollTo(0,0);}
+  // The owner's 4 preset replies (approved by Wanda 11-02-2026)
+  var REPLY={moving_now:["Moving now","Me muevo ahora"],five_min:["On my way, 5 min","En camino, 5 min"],ten_min:["Be there in 10 min","Llego en 10 min"],cant_move:["Can't move right now, about 30 min","No puedo ahora mismo, unos 30 min"]};
+  var VIEWS=["v-loading","v-landing","v-courtesy","v-inactive","v-alert","v-thanks","v-ended"];
+  function $(id){return document.getElementById(id);}
+  function show(id){VIEWS.forEach(function(v){$(v).hidden=(v!==id);});window.scrollTo(0,0);}
+  function isEs(){return document.documentElement.lang==="es";}
+  function hhmm(iso){if(!iso)return "";try{return new Date(iso).toLocaleTimeString(isEs()?"es-US":"en-US",{hour:"numeric",minute:"2-digit"});}catch(e){return "";}}
+  function post(body){return fetch(BoxedIn.API+"/functions/v1/scan",{method:"POST",headers:{apikey:BoxedIn.KEY,"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.ok?r.json():null;});}
+  function keep(k,v){try{if(v===undefined)return sessionStorage.getItem(k);if(v===null)sessionStorage.removeItem(k);else sessionStorage.setItem(k,v);}catch(e){return null;}}
+
   var m=location.pathname.match(/^\/s\/([A-Za-z0-9]{6,16})\/?$/);
   if(!m){show("v-inactive");return;}
-  var code=m[1].toUpperCase();
-  fetch(BoxedIn.API+"/functions/v1/scan?code="+encodeURIComponent(code),{headers:{apikey:BoxedIn.KEY}})
-   .then(function(r){return r.ok?r.json():null;})
-   .then(function(d){
-     if(!d||d.status!=="active"){show("v-inactive");return;}
-     var en=[d.make,d.model].filter(Boolean).join(" ");
-     var c=document.getElementById("car");
-     function label(){var l=document.documentElement.lang; var col=(d.color||""); var colEs=ES[col.toLowerCase()]||col; c.textContent=en+(col?" · "+(l==="es"?colEs:col):"");}
-     label(); document.querySelectorAll("[data-switch]").forEach(function(b){b.addEventListener("click",label);});
-     show("v-landing");
-     document.getElementById("go-courtesy").onclick=function(){show("v-courtesy");};
-     // Sending the alert is build step 6. Until then (and whenever sending fails), the scanner sees the inactive screen, never an error.
-     document.getElementById("send").onclick=function(){
-       fetch(BoxedIn.API+"/functions/v1/scan",{method:"POST",headers:{apikey:BoxedIn.KEY,"Content-Type":"application/json"},body:JSON.stringify({action:"send",code:code})})
-        .then(function(r){return r.ok?r.json():null;}).then(function(x){if(!x||!x.ok)show("v-inactive");}).catch(function(){show("v-inactive");});
-     };
-   }).catch(function(){show("v-inactive");});
+  var code=m[1].toUpperCase(), tokKey="boxedin-alert-"+code, token=keep(tokKey), last=null, timer=null, tick=null;
+
+  function setOn(li,on){li.querySelector('[data-st="off"]').hidden=on;li.querySelector('[data-st="on"]').hidden=!on;li.className=on?"done":"";}
+  function render(d){
+    last=d; var st=d.stage;
+    if(st==="unknown"){keep(tokKey,null);token=null;start();return;}
+    if(st==="canceled"||st==="closed"){stop();$("e-canceled").hidden=(st!=="canceled");$("e-closed").hidden=(st!=="closed");show("v-ended");return;}
+    if(st==="scanner_out"||(st==="moved"&&d.scanner_out_at)){stop();$("thank").hidden=!!d.thanked;$("thanked").hidden=!d.thanked;show("v-thanks");return;}
+    var h=st==="moved"?"moved":(st==="replied"?"replied":"waiting");
+    document.querySelectorAll("#v-alert [data-h]").forEach(function(e){e.hidden=e.getAttribute("data-h")!==h;});
+    $("a-stay").hidden=(h!=="waiting"); $("a-moved").hidden=(h!=="moved");
+    $("t-sent").textContent=hhmm(d.sent_at);
+    setOn($("s-deliv"),!!d.delivered_at||!!d.replied_at); $("t-deliv").textContent=hhmm(d.delivered_at);
+    setOn($("s-reply"),!!d.reply); var r=REPLY[d.reply]; $("reply-text").textContent=r?r[isEs()?1:0]:"";
+    countdown(d.cancel_seconds_left||0);
+    show("v-alert");
+    if(st==="moved")stop();
+  }
+  function countdown(left){
+    clearInterval(tick); var end=Date.now()+left*1000;
+    function draw(){var s=Math.max(0,Math.ceil((end-Date.now())/1000)); $("cancel").hidden=(s<=0||(last&&last.stage!=="sent"&&last.stage!=="delivered"&&last.stage!=="replied")); $("cancel-left").textContent="(0:"+(s<10?"0":"")+s+")"; if(s<=0)clearInterval(tick);}
+    draw(); if(left>0)tick=setInterval(draw,500);
+  }
+  function poll(){post({action:"status",token:token}).then(function(d){if(d)render(d);}).catch(function(){});}
+  function follow(){stop();poll();timer=setInterval(poll,4000);}
+  function stop(){clearInterval(timer);timer=null;}
+
+  // Language switch re-draws the reply and times in the new language
+  document.querySelectorAll("[data-switch]").forEach(function(b){b.addEventListener("click",function(){if(last)render(last);});});
+
+  $("cancel").onclick=function(){post({action:"cancel",token:token}).then(function(){poll();});};
+  $("out").onclick=function(){post({action:"out",token:token}).then(function(){poll();});};
+  $("thank").onclick=function(){post({action:"thanks",token:token}).then(function(x){if(x&&x.ok){$("thank").hidden=true;$("thanked").hidden=false;}});};
+  $("restart").onclick=function(){keep(tokKey,null);token=null;last=null;start();};
+
+  function start(){
+    show("v-loading");
+    fetch(BoxedIn.API+"/functions/v1/scan?code="+encodeURIComponent(code),{headers:{apikey:BoxedIn.KEY}})
+     .then(function(r){return r.ok?r.json():null;})
+     .then(function(d){
+       if(!d||d.status!=="active"){show("v-inactive");return;}
+       var en=[d.make,d.model].filter(Boolean).join(" ");
+       var c=$("car");
+       function label(){var col=(d.color||""); var colEs=ES[col.toLowerCase()]||col; c.textContent=en+(col?" · "+(isEs()?colEs:col):"");}
+       label(); document.querySelectorAll("[data-switch]").forEach(function(b){b.addEventListener("click",label);});
+       show("v-landing");
+       $("go-courtesy").onclick=function(){show("v-courtesy");};
+       // Any refusal (blocked, limit reached, nobody reachable) shows the same "can't reach" screen, never an error.
+       $("send").onclick=function(){
+         $("send").disabled=true;
+         post({action:"send",code:code}).then(function(x){
+           $("send").disabled=false;
+           if(!x||!x.ok||!x.token){show("v-inactive");return;}
+           token=x.token; keep(tokKey,token); follow();
+         }).catch(function(){$("send").disabled=false;show("v-inactive");});
+       };
+     }).catch(function(){show("v-inactive");});
+  }
+  // Reopening the page during an alert picks it back up
+  if(token)follow(); else start();
 })();</script>
 </body></html>
