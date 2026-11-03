@@ -101,3 +101,7 @@ ol.track .when{color:var(--secondary);font-size:14px;margin-left:6px}
 #r-send:disabled{opacity:.4;cursor:default}
 #v-report-911 .oz{font-size:28px;line-height:1.2}
 #v-report-911 .btn-orange{margin:24px 0 12px}
+
+/* 11-03-2026: opt-in neighborhood card (below "I'm out", never competing with it) */
+.area-card{margin-top:40px}
+.area-btns{display:flex;gap:12px;flex-wrap:wrap}.area-btns .btn-outline{flex:1 1 140px;margin-top:4px}

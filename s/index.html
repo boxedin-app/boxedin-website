@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-02-2026f"></head><body class="scan"><div class="wrap">
+<title>BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-03-2026a"></head><body class="scan"><div class="wrap">
 <header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
 <div class="langs"><button type="button" data-switch="es" data-lang="en">Español</button><button type="button" data-switch="en" data-lang="es" hidden>English</button></div></header>
 <span data-title-en="BoxedIn" data-title-es="BoxedIn" hidden></span>
@@ -49,6 +49,14 @@
 <button class="btn-outline" type="button" id="cancel" hidden><span data-lang="en">Cancel alert</span><span data-lang="es" hidden>Cancelar alerta</span> <span id="cancel-left"></span></button>
 <div class="outbox"><button class="btn-orange" type="button" id="out"><span data-lang="en">I'm out</span><span data-lang="es" hidden>Ya salí</span></button>
 <p class="small muted center"><span data-lang="en">Got out? Tap "I'm out" so we can close this alert. It helps us make BoxedIn faster for every neighbor.</span><span data-lang="es" hidden>¿Ya salió? Toque "Ya salí" para cerrar esta alerta. Nos ayuda a que BoxedIn sea más rápido para todos.</span></p></div>
+<!-- Opt-in neighborhood (approved 11-02-2026 with Lex's conditions). The phone turns its location into a neighborhood code; only the code is sent. -->
+<div class="card area-card" id="area" hidden>
+<div class="tag"><span data-lang="en">While you wait</span><span data-lang="es" hidden>Mientras espera</span></div>
+<p id="area-ask"><span data-lang="en">Help us map double parking in NYC? We keep only the neighborhood and the time, never your exact location.</span><span data-lang="es" hidden>¿Nos ayuda a mapear el estacionamiento en doble fila en Nueva York? Solo guardamos el vecindario y la hora, nunca su ubicación exacta.</span></p>
+<div class="area-btns" id="area-btns"><button class="btn-outline" type="button" id="area-yes"><span data-lang="en">Share my area</span><span data-lang="es" hidden>Compartir mi zona</span></button>
+<button class="btn-outline" type="button" id="area-no"><span data-lang="en">No thanks</span><span data-lang="es" hidden>No, gracias</span></button></div>
+<p id="area-done" hidden><strong><span data-lang="en">Thanks for helping map NYC.</span><span data-lang="es" hidden>Gracias por ayudarnos a mapear Nueva York.</span></strong></p>
+</div>
 <p class="report-link" hidden><button type="button" class="linkbtn" data-report><span data-lang="en">Report a safety problem</span><span data-lang="es" hidden>Reportar un problema de seguridad</span></button></p>
 </section>
 
@@ -140,7 +148,7 @@
     setOn($("s-deliv"),!!d.delivered_at||!!d.replied_at); $("t-deliv").textContent=hhmm(d.delivered_at);
     setOn($("s-reply"),!!d.reply); var r=REPLY[d.reply]; $("reply-text").textContent=r?r[isEs()?1:0]:"";
     countdown(d.cancel_seconds_left||0);
-    show("v-alert"); reportLink();
+    show("v-alert"); reportLink(); areaCard(st);
     if(st==="moved")stop();
   }
   function countdown(left){
@@ -180,6 +188,33 @@
       if(x&&x.reason==="limit"){keep(repKey,"1");$("r-ok").hidden=true;$("r-limit").hidden=false;show("v-report-done");return;}
       $("r-send").disabled=false; keep(repKey,"1"); closeReport();   // too late or alert gone: hide the link quietly
     }).catch(function(){$("r-send").disabled=false;});
+  };
+
+  // ---- Opt-in neighborhood (11-03-2026). Asked only while the alert is open. The location never leaves the phone:
+  // the page finds which NYC neighborhood the point falls in and sends only that code. Outside NYC or no permission: nothing is sent.
+  function areaKey(){return "boxedin-area-"+(token||"").slice(0,16);}
+  function areaCard(st){
+    var c=$("area"); if(!c)return;
+    var open=(st==="sent"||st==="delivered"||st==="replied");
+    c.hidden=!(open&&!keep(areaKey())&&("geolocation" in navigator));
+  }
+  function inRing(x,y,ring){var inside=false;for(var i=0,j=ring.length-1;i<ring.length;j=i++){var xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];
+    if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))inside=!inside;}return inside;}
+  function findArea(map,lon,lat){for(var code in map){var polys=map[code];for(var p=0;p<polys.length;p++){var n=0;
+    for(var r=0;r<polys[p].length;r++){if(inRing(lon,lat,polys[p][r]))n++;} if(n%2===1)return code;}}return null;}
+  function areaDone(sent){keep(areaKey(),"1");$("area-btns").hidden=true;$("area-ask").hidden=sent;$("area-done").hidden=!sent;
+    if(!sent)$("area").hidden=true;}
+  $("area-no").onclick=function(){areaDone(false);};
+  $("area-yes").onclick=function(){
+    $("area-yes").disabled=true;
+    navigator.geolocation.getCurrentPosition(function(pos){
+      var lon=pos.coords.longitude, lat=pos.coords.latitude;
+      fetch("/data/nyc-neighborhoods.json").then(function(r){return r.ok?r.json():null;}).then(function(m){
+        var code=m&&findArea(m.areas,lon,lat); lon=lat=null; // the coordinates are dropped right here
+        if(!code){areaDone(false);return;}
+        post({action:"area",token:token,area:code}).then(function(x){areaDone(!!(x&&x.ok));}).catch(function(){areaDone(false);});
+      }).catch(function(){areaDone(false);});
+    },function(){areaDone(false);},{enableHighAccuracy:false,timeout:15000,maximumAge:300000});
   };
 
   function start(){
