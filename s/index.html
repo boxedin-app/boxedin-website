@@ -205,6 +205,14 @@
        };
      }).catch(function(){show("v-inactive");});
   }
+  // Review only: on a private Netlify preview (never on boxedinnyc.com), /s/PREVIEW1?preview=report opens the report
+  // screens without a real alert; add &limit=1 to see the over-the-limit message. Nothing is sent.
+  var demo=/--boxedin-website\.netlify\.app$/.test(location.hostname)&&/[?&]preview=report/.test(location.search);
+  if(demo){
+    var demoLimit=/[?&]limit=1/.test(location.search);
+    $("r-send").onclick=function(){$("r-ok").hidden=demoLimit;$("r-limit").hidden=!demoLimit;show("v-report-done");};
+    reporting=true; show("v-report-911"); return;
+  }
   // Reopening the page during an alert picks it back up
   if(token)follow(); else start();
 })();</script>
