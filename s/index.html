@@ -75,8 +75,8 @@
 <script>var lang=BoxedIn.initLang();
 (function(){
   var ES={black:"negro",white:"blanco",silver:"plateado",gray:"gris",grey:"gris",red:"rojo",blue:"azul",green:"verde",brown:"marrón",beige:"beige",gold:"dorado",yellow:"amarillo",orange:"anaranjado",purple:"morado",tan:"beige"};
-  // The owner's 4 preset replies, as the app shows them (wording pending Wanda's approval; not live until merged)
-  var REPLY={moving_now:["Moving now","Me muevo ahora"],five_min:["On my way, 5 min","En camino, 5 min"],ten_min:["Be there in 10 min","Llego en 10 min"],cant_move:["Can't move right now, about 30 min","No puedo ahora, 30 min"]};
+  // The owner's 4 preset replies (approved by Wanda 11-02-2026)
+  var REPLY={moving_now:["Moving now","Me muevo ahora"],five_min:["On my way, 5 min","En camino, 5 min"],ten_min:["Be there in 10 min","Llego en 10 min"],cant_move:["Can't move right now, about 30 min","No puedo ahora mismo, unos 30 min"]};
   var VIEWS=["v-loading","v-landing","v-courtesy","v-inactive","v-alert","v-thanks","v-ended"];
   function $(id){return document.getElementById(id);}
   function show(id){VIEWS.forEach(function(v){$(v).hidden=(v!==id);});window.scrollTo(0,0);}
