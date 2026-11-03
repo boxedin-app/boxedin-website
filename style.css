@@ -77,3 +77,9 @@ table{margin:20px 0 28px}
 .safety{margin-top:36px}
 footer{margin-top:64px}
 footer p{margin:0 0 12px}
+/* 11-02-2026 step 6: live alert screens */
+ol.track{list-style:none;padding:0;margin:0}ol.track li{padding:10px 0 10px 30px;position:relative;color:var(--secondary);margin:0;border-bottom:1px solid var(--hairline)}
+ol.track li:last-child{border-bottom:0}ol.track li::before{content:"";position:absolute;left:4px;top:15px;width:12px;height:12px;border-radius:50%;border:2px solid var(--secondary)}
+ol.track li.done{color:var(--text)}ol.track li.done::before{background:var(--orange);border-color:var(--orange)}
+ol.track .when{color:var(--secondary);font-size:14px;margin-left:6px}
+#cancel{margin:4px 0 20px}.outbox{margin-top:8px}.center{text-align:center}
