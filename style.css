@@ -57,3 +57,23 @@ ol.steps{padding-left:24px;margin:20px 0}ol.steps li{margin:8px 0}
 .scan .card{margin:28px 0 32px}
 .scan .small{margin:24px 0 28px}
 .scan .btn-orange,.scan .btn-outline{margin-top:8px}
+
+/* 11-02-2026: breathing room on every page (Wanda: "make sure none of the sections are crammed") */
+h1.oz{margin:12px 0 24px}
+h2.oz{margin:56px 0 18px}
+h3{margin:36px 0 12px}
+.lead{margin:0 0 24px;line-height:1.6}
+p{margin:0 0 16px}
+.card{padding:26px 24px;margin:32px 0}
+.card>*:last-child{margin-bottom:0}
+.card p{margin:0 0 14px}
+.tag{margin-bottom:12px}
+.price{margin:4px 0 12px}
+.facts{margin:24px 0 16px}
+ol.steps{margin:28px 0 32px}ol.steps li{margin:0 0 14px;line-height:1.55}
+ul{margin:16px 0 24px}li{margin:0 0 10px}
+table{margin:20px 0 28px}
+.btn,.btn-orange,.btn-outline{margin-top:8px}
+.safety{margin-top:36px}
+footer{margin-top:64px}
+footer p{margin:0 0 12px}
