@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-02-2026e"></head><body class="scan"><div class="wrap">
+<title>BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-02-2026f"></head><body class="scan"><div class="wrap">
 <header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
 <div class="langs"><button type="button" data-switch="es" data-lang="en">Español</button><button type="button" data-switch="en" data-lang="es" hidden>English</button></div></header>
 <span data-title-en="BoxedIn" data-title-es="BoxedIn" hidden></span>
@@ -49,6 +49,7 @@
 <button class="btn-outline" type="button" id="cancel" hidden><span data-lang="en">Cancel alert</span><span data-lang="es" hidden>Cancelar alerta</span> <span id="cancel-left"></span></button>
 <div class="outbox"><button class="btn-orange" type="button" id="out"><span data-lang="en">I'm out</span><span data-lang="es" hidden>Ya salí</span></button>
 <p class="small muted center"><span data-lang="en">Got out? Tap "I'm out" so we can close this alert. It helps us make BoxedIn faster for every neighbor.</span><span data-lang="es" hidden>¿Ya salió? Toque "Ya salí" para cerrar esta alerta. Nos ayuda a que BoxedIn sea más rápido para todos.</span></p></div>
+<p class="report-link" hidden><button type="button" class="linkbtn" data-report><span data-lang="en">Report a safety problem</span><span data-lang="es" hidden>Reportar un problema de seguridad</span></button></p>
 </section>
 
 <section id="v-thanks" hidden>
@@ -57,6 +58,7 @@
 <button class="btn-outline" type="button" id="thank"><span data-lang="en">Send the owner a thank-you</span><span data-lang="es" hidden>Enviarle las gracias al dueño</span></button>
 <p class="lead" id="thanked" hidden><strong><span data-lang="en">Sent. The owner will see your thanks.</span><span data-lang="es" hidden>Enviado. El dueño verá su agradecimiento.</span></strong></p>
 <p class="sticker-cta"><a class="btn-orange" href="/"><span data-lang="en">Get your own sticker</span><span data-lang="es" hidden>Obtenga su propia calcomanía</span></a></p>
+<p class="report-link" hidden><button type="button" class="linkbtn" data-report><span data-lang="en">Report a safety problem</span><span data-lang="es" hidden>Reportar un problema de seguridad</span></button></p>
 </section>
 
 <section id="v-ended" hidden>
@@ -65,6 +67,36 @@
 <div id="e-closed" hidden><div data-lang="en"><h1 class="oz">Alert closed.</h1><p class="lead">This alert closed on its own after 2 hours.</p></div>
 <div data-lang="es" hidden><h1 class="oz">Alerta cerrada.</h1><p class="lead">Esta alerta se cerró sola después de 2 horas.</p></div></div>
 <button class="btn-outline" type="button" id="restart" style="margin-top:20px"><span data-lang="en">Back to start</span><span data-lang="es" hidden>Volver al inicio</span></button>
+<p class="report-link" hidden><button type="button" class="linkbtn" data-report><span data-lang="en">Report a safety problem</span><span data-lang="es" hidden>Reportar un problema de seguridad</span></button></p>
+</section>
+
+<!-- Step 7: safety report (scanner). 911 first (C1, C2), then the form, then C6 (sent) or C7 (limit). Scanners can't block. -->
+<section id="v-report-911" hidden>
+<h1 class="oz"><span data-lang="en">In danger, threatened, or feel unsafe? Call 911 first. We are not an emergency service.</span><span data-lang="es" hidden>¿Está en peligro, lo amenazan o se siente inseguro? Llame primero al 911. No somos un servicio de emergencias.</span></h1>
+<a class="btn-orange" href="tel:911"><span data-lang="en">Call 911</span><span data-lang="es" hidden>Llamar al 911</span></a>
+<button type="button" class="btn-outline" id="r-tell"><span data-lang="en">Tell us what happened</span><span data-lang="es" hidden>Cuéntenos qué pasó</span></button>
+<p class="center"><button type="button" class="linkbtn" data-report-back><span data-lang="en">Back</span><span data-lang="es" hidden>Volver</span></button></p>
+</section>
+
+<section id="v-report-form" hidden>
+<h1 class="oz"><span data-lang="en">Report a safety problem</span><span data-lang="es" hidden>Reportar un problema de seguridad</span></h1>
+<fieldset class="radios"><legend class="lead"><strong><span data-lang="en">What happened?</span><span data-lang="es" hidden>¿Qué pasó?</span></strong></legend>
+<label class="radio"><input type="radio" name="rtype" value="threatened"> <span data-lang="en">Threatened</span><span data-lang="es" hidden>Me amenazaron</span></label>
+<label class="radio"><input type="radio" name="rtype" value="harassed"> <span data-lang="en">Harassed</span><span data-lang="es" hidden>Me acosaron</span></label>
+<label class="radio"><input type="radio" name="rtype" value="followed"> <span data-lang="en">Followed</span><span data-lang="es" hidden>Me siguieron</span></label>
+<label class="radio"><input type="radio" name="rtype" value="other"> <span data-lang="en">Other</span><span data-lang="es" hidden>Otro</span></label>
+</fieldset>
+<label class="notelabel" for="r-note"><span data-lang="en">Add details (optional)</span><span data-lang="es" hidden>Agregue detalles (opcional)</span></label>
+<textarea id="r-note" maxlength="280" rows="4" data-ph-en="A few words are enough" data-ph-es="Con unas pocas palabras basta"></textarea>
+<p class="small muted count"><span id="r-count">0</span>/280</p>
+<button class="btn-orange" type="button" id="r-send" disabled><span data-lang="en">Send report</span><span data-lang="es" hidden>Enviar reporte</span></button>
+<p class="center"><button type="button" class="linkbtn" data-report-back><span data-lang="en">Back</span><span data-lang="es" hidden>Volver</span></button></p>
+</section>
+
+<section id="v-report-done" hidden>
+<p class="lead" id="r-ok"><strong><span data-lang="en">Thanks for telling us. A BoxedIn support representative will review this within 1 business day. If you're in danger, call 911.</span><span data-lang="es" hidden>Gracias por avisarnos. Un representante de soporte de BoxedIn lo revisará en un plazo de 1 día hábil. Si está en peligro, llame al 911.</span></strong></p>
+<p class="lead" id="r-limit" hidden><strong><span data-lang="en">We've received your reports. If you're in danger, call 911. For anything else, email <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</span><span data-lang="es" hidden>Recibimos sus reportes. Si está en peligro, llame al 911. Para todo lo demás, escriba a <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</span></strong></p>
+<button class="btn-outline" type="button" data-report-back><span data-lang="en">Done</span><span data-lang="es" hidden>Listo</span></button>
 </section>
 </main>
 <footer><nav><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/refunds.html">Refunds &amp; Cancellation</a><a href="/contact.html">Contact</a></nav>
@@ -77,9 +109,10 @@
   var ES={black:"negro",white:"blanco",silver:"plateado",gray:"gris",grey:"gris",red:"rojo",blue:"azul",green:"verde",brown:"marrón",beige:"beige",gold:"dorado",yellow:"amarillo",orange:"anaranjado",purple:"morado",tan:"beige"};
   // The owner's 4 preset replies (approved by Wanda 11-02-2026)
   var REPLY={moving_now:["Moving now","Me muevo ahora"],five_min:["On my way, 5 min","En camino, 5 min"],ten_min:["Be there in 10 min","Llego en 10 min"],cant_move:["Can't move right now, about 30 min","No puedo ahora mismo, unos 30 min"]};
-  var VIEWS=["v-loading","v-landing","v-courtesy","v-inactive","v-alert","v-thanks","v-ended"];
+  var VIEWS=["v-loading","v-landing","v-courtesy","v-inactive","v-alert","v-thanks","v-ended","v-report-911","v-report-form","v-report-done"];
   function $(id){return document.getElementById(id);}
   function show(id){VIEWS.forEach(function(v){$(v).hidden=(v!==id);});window.scrollTo(0,0);}
+  var reporting=false; // while the report screens are open, status polls update the alert quietly in the background
   function isEs(){return document.documentElement.lang==="es";}
   function hhmm(iso){if(!iso)return "";try{return new Date(iso).toLocaleTimeString(isEs()?"es-US":"en-US",{hour:"numeric",minute:"2-digit"});}catch(e){return "";}}
   function post(body){return fetch(BoxedIn.API+"/functions/v1/scan",{method:"POST",headers:{apikey:BoxedIn.KEY,"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.ok?r.json():null;});}
@@ -87,14 +120,19 @@
 
   var m=location.pathname.match(/^\/s\/([A-Za-z0-9]{6,16})\/?$/);
   if(!m){show("v-inactive");return;}
-  var code=m[1].toUpperCase(), tokKey="boxedin-alert-"+code, token=keep(tokKey), last=null, timer=null, tick=null;
+  var code=m[1].toUpperCase(), tokKey="boxedin-alert-"+code, repKey="", token=keep(tokKey), last=null, timer=null, tick=null;
 
   function setOn(li,on){li.querySelector('[data-st="off"]').hidden=on;li.querySelector('[data-st="on"]').hidden=!on;li.className=on?"done":"";}
+  function reportLink(){
+    var ok=!!(token&&last&&last.sent_at&&(Date.now()-new Date(last.sent_at).getTime())<24*3600*1000&&keep(repKeyFor())!=="1");
+    document.querySelectorAll(".report-link").forEach(function(e){e.hidden=!ok;});
+  }
   function render(d){
     last=d; var st=d.stage;
+    if(reporting&&st!=="unknown"){return;}
     if(st==="unknown"){keep(tokKey,null);token=null;start();return;}
-    if(st==="canceled"||st==="closed"){stop();$("e-canceled").hidden=(st!=="canceled");$("e-closed").hidden=(st!=="closed");show("v-ended");return;}
-    if(st==="scanner_out"||(st==="moved"&&d.scanner_out_at)){stop();$("thank").hidden=!!d.thanked;$("thanked").hidden=!d.thanked;show("v-thanks");return;}
+    if(st==="canceled"||st==="closed"){stop();$("e-canceled").hidden=(st!=="canceled");$("e-closed").hidden=(st!=="closed");show("v-ended");reportLink();return;}
+    if(st==="scanner_out"||(st==="moved"&&d.scanner_out_at)){stop();$("thank").hidden=!!d.thanked;$("thanked").hidden=!d.thanked;show("v-thanks");reportLink();return;}
     var h=st==="moved"?"moved":(st==="replied"?"replied":"waiting");
     document.querySelectorAll("#v-alert [data-h]").forEach(function(e){e.hidden=e.getAttribute("data-h")!==h;});
     $("a-stay").hidden=(h!=="waiting"); $("a-moved").hidden=(h!=="moved");
@@ -102,7 +140,7 @@
     setOn($("s-deliv"),!!d.delivered_at||!!d.replied_at); $("t-deliv").textContent=hhmm(d.delivered_at);
     setOn($("s-reply"),!!d.reply); var r=REPLY[d.reply]; $("reply-text").textContent=r?r[isEs()?1:0]:"";
     countdown(d.cancel_seconds_left||0);
-    show("v-alert");
+    show("v-alert"); reportLink();
     if(st==="moved")stop();
   }
   function countdown(left){
@@ -121,6 +159,28 @@
   $("out").onclick=function(){post({action:"out",token:token}).then(function(){poll();});};
   $("thank").onclick=function(){post({action:"thanks",token:token}).then(function(x){if(x&&x.ok){$("thank").hidden=true;$("thanked").hidden=false;}});};
   $("restart").onclick=function(){keep(tokKey,null);token=null;last=null;start();};
+
+  // ---- Safety report (step 7). One report per alert; the page remembers it so the link goes away after sending. ----
+  function repKeyFor(){return "boxedin-report-"+(token||"").slice(0,16);}
+  function openReport(){repKey=repKeyFor(); reporting=true; show("v-report-911");}
+  function closeReport(){reporting=false; if(last){render(last);}else{start();}}
+  document.querySelectorAll("[data-report]").forEach(function(b){b.onclick=openReport;});
+  document.querySelectorAll("[data-report-back]").forEach(function(b){b.onclick=function(){
+    if(!$("v-report-form").hidden){show("v-report-911");return;} closeReport();};});
+  $("r-tell").onclick=function(){show("v-report-form");};
+  function ph(){var t=$("r-note");t.placeholder=t.getAttribute(isEs()?"data-ph-es":"data-ph-en");}
+  ph(); document.querySelectorAll("[data-switch]").forEach(function(b){b.addEventListener("click",ph);});
+  document.querySelectorAll('input[name="rtype"]').forEach(function(r){r.onchange=function(){$("r-send").disabled=false;};});
+  $("r-note").oninput=function(){$("r-count").textContent=this.value.length;};
+  $("r-send").onclick=function(){
+    var sel=document.querySelector('input[name="rtype"]:checked'); if(!sel)return;
+    $("r-send").disabled=true;
+    post({action:"report",token:token,type:sel.value,note:$("r-note").value.slice(0,280)}).then(function(x){
+      if(x&&x.ok){keep(repKey,"1");$("r-ok").hidden=false;$("r-limit").hidden=true;show("v-report-done");return;}
+      if(x&&x.reason==="limit"){keep(repKey,"1");$("r-ok").hidden=true;$("r-limit").hidden=false;show("v-report-done");return;}
+      $("r-send").disabled=false; keep(repKey,"1"); closeReport();   // too late or alert gone: hide the link quietly
+    }).catch(function(){$("r-send").disabled=false;});
+  };
 
   function start(){
     show("v-loading");
@@ -144,6 +204,14 @@
          }).catch(function(){$("send").disabled=false;show("v-inactive");});
        };
      }).catch(function(){show("v-inactive");});
+  }
+  // Review only: on a private Netlify preview (never on boxedinnyc.com), /s/PREVIEW1?preview=report opens the report
+  // screens without a real alert; add &limit=1 to see the over-the-limit message. Nothing is sent.
+  var demo=/--boxedin-website\.netlify\.app$/.test(location.hostname)&&/[?&]preview=report/.test(location.search);
+  if(demo){
+    var demoLimit=/[?&]limit=1/.test(location.search);
+    $("r-send").onclick=function(){$("r-ok").hidden=demoLimit;$("r-limit").hidden=!demoLimit;show("v-report-done");};
+    reporting=true; show("v-report-911"); return;
   }
   // Reopening the page during an alert picks it back up
   if(token)follow(); else start();
