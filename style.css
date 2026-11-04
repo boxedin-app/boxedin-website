@@ -101,3 +101,12 @@ ol.track .when{color:var(--secondary);font-size:14px;margin-left:6px}
 #r-send:disabled{opacity:.4;cursor:default}
 #v-report-911 .oz{font-size:28px;line-height:1.2}
 #v-report-911 .btn-orange{margin:24px 0 12px}
+
+/* Language pill (11-03-2026), same as the app's LanguageToggle: 92x34 track, 44x30 pill, 44x44 tap areas */
+.lang-pill{display:flex;align-items:center;width:92px;height:44px;position:relative;flex:none}
+.lang-pill::before{content:"";position:absolute;left:0;right:0;top:5px;height:34px;border-radius:17px;background:var(--raised)}
+.lang-pill button{position:relative;width:44px;height:44px;padding:0;margin:0;border:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font:500 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--secondary)}
+.lang-pill button span{display:flex;align-items:center;justify-content:center;width:44px;height:30px;border-radius:15px}
+.lang-pill button[aria-pressed="true"]{color:var(--text);font-weight:700}
+.lang-pill button[aria-pressed="true"] span{background:var(--surface)}
+.lang-pill button:focus-visible{outline:2px solid var(--orange);outline-offset:-2px;border-radius:15px}

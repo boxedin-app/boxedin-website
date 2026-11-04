@@ -17,6 +17,7 @@ window.BoxedIn = (function () {
     document.documentElement.lang = lang;
     document.querySelectorAll("[data-lang]").forEach(function (el) { el.hidden = el.getAttribute("data-lang") !== lang; });
     document.querySelectorAll("[data-title-" + lang + "]").forEach(function (el) { document.title = el.getAttribute("data-title-" + lang); });
+    document.querySelectorAll(".lang-pill [data-switch]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-switch") === lang ? "true" : "false"); });
   }
   function initLang() {
     var lang = pickLang();
