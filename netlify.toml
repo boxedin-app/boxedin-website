@@ -40,3 +40,12 @@
     Cache-Control = "no-store"
     Referrer-Policy = "no-referrer"
     X-Robots-Tag = "noindex"
+
+# Universal Links (11-04-2026): tells iPhones that BoxedIn (team 8JGAU4NY6D, app com.boxedinnyc.app)
+# may open boxedinnyc.com/email-confirmed links. Apple requires this file be served as JSON with no redirect.
+# No customer wording. Only the paths listed in the file open the app; every other page stays on the website.
+[[headers]]
+  for = "/.well-known/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=3600"
