@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["8JGAU4NY6D.com.boxedinnyc.app"],
+        "components": [
+          { "/": "/email-confirmed", "comment": "Email confirmation landing page" },
+          { "/": "/email-confirmed/*", "comment": "Email confirmation landing page, with language or token" }
+        ]
+      },
+      {
+        "appID": "8JGAU4NY6D.com.boxedinnyc.app",
+        "paths": ["/email-confirmed", "/email-confirmed/*"]
+      }
+    ]
+  }
+}
