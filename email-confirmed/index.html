@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Email confirmed | BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-03-2026"></head><body class=""><div class="wrap">
+<header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
+<div class="lang-pill" role="group" aria-label="Language / Idioma"><button type="button" data-switch="en" aria-pressed="true" aria-label="English"><span>EN</span></button><button type="button" data-switch="es" aria-pressed="false" aria-label="Español"><span>ES</span></button></div></header>
+<span data-title-en="Email confirmed | BoxedIn" data-title-es="Correo electrónico confirmado | BoxedIn" hidden></span>
+<main>
+<div id="ok">
+<div data-lang="en"><h1 class="oz">Email confirmed.</h1><p class="lead">You're all set. You can go back to the BoxedIn app.</p></div>
+<div data-lang="es" hidden><h1 class="oz">Correo electrónico confirmado.</h1><p class="lead">Todo listo. Puede volver a la app de BoxedIn.</p></div>
+</div>
+<div id="bad" hidden>
+<div data-lang="en"><h1 class="oz">This link has expired or was already used.</h1><p class="lead">Open the BoxedIn app and check Settings &gt; Email.</p></div>
+<div data-lang="es" hidden><h1 class="oz">Este enlace venció o ya se usó.</h1><p class="lead">Abra la app de BoxedIn y revise Ajustes &gt; Correo.</p></div>
+</div>
+</main>
+<footer><nav><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/refunds.html">Refunds &amp; Cancellation</a><a href="/contact.html">Contact</a></nav>
+<p>&copy; 2026 BoxedIn LLC, a New York limited liability company. Questions: <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</p><p>BoxedIn is a trademark of BoxedIn LLC.</p></footer>
+</div>
+<script src="/site.js?v=11-03-2026"></script>
+<script>
+BoxedIn.initLang();
+// Supabase sends people here after the confirmation link. A failed or old link carries "error" in the address.
+(function () {
+  var s = (location.hash || "") + "&" + (location.search || "");
+  var failed = /(^|[#&?])error(_code)?=/.test(s);
+  if (failed) {
+    document.getElementById("ok").hidden = true;
+    document.getElementById("bad").hidden = false;
+    var t = document.querySelector("[data-title-en]");
+    t.setAttribute("data-title-en", "Link expired | BoxedIn");
+    t.setAttribute("data-title-es", "Enlace vencido | BoxedIn");
+    document.title = document.documentElement.lang === "es" ? "Enlace vencido | BoxedIn" : "Link expired | BoxedIn";
+  }
+  // Never leave sign-in tokens in the address bar or browser history.
+  if (location.hash) history.replaceState(null, "", location.pathname + (/[?&]lang=(en|es)/.test(location.search) ? "?lang=" + RegExp.$1 : ""));
+})();
+</script>
+</body></html>
