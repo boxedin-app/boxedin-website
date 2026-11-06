@@ -2,15 +2,36 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["8JGAU4NY6D.com.boxedinnyc.app"],
+        "appIDs": [
+          "8JGAU4NY6D.com.boxedinnyc.app"
+        ],
         "components": [
-          { "/": "/email-confirmed", "comment": "Email confirmation landing page" },
-          { "/": "/email-confirmed/*", "comment": "Email confirmation landing page, with language or token" }
+          {
+            "/": "/email-confirmed",
+            "comment": "Email confirmation landing page"
+          },
+          {
+            "/": "/email-confirmed/*",
+            "comment": "Email confirmation landing page, with language or token"
+          },
+          {
+            "/": "/open",
+            "comment": "Open the app from any BoxedIn email"
+          },
+          {
+            "/": "/open/*",
+            "comment": "Open the app from any BoxedIn email, with a path"
+          }
         ]
       },
       {
         "appID": "8JGAU4NY6D.com.boxedinnyc.app",
-        "paths": ["/email-confirmed", "/email-confirmed/*"]
+        "paths": [
+          "/email-confirmed",
+          "/email-confirmed/*",
+          "/open",
+          "/open/*"
+        ]
       }
     ]
   }
