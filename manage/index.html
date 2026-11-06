@@ -53,12 +53,13 @@
 <section class="m-view" id="v-canceled" hidden>
 <p class="lead"><span data-lang="en">Your renewal is canceled. You'll keep BoxedIn until <b data-f="renews"></b>. We've emailed you a confirmation.</span><span data-lang="es" hidden>Su renovación está cancelada. Conservará BoxedIn hasta el <b data-f="renews"></b>. Le enviamos una confirmación por correo electrónico.</span></p>
 <p class="m-err" data-err hidden></p>
-<button type="button" class="btn-outline" data-act="resume_renewal"><span data-lang="en">Turn renewal back on</span><span data-lang="es" hidden>Activar la renovación de nuevo</span></button>
+<button type="button" class="btn-orange" data-act="resume_renewal"><span data-lang="en">Turn renewal back on</span><span data-lang="es" hidden>Activar la renovación de nuevo</span></button>
 </section>
 
 <!-- 3d. Before the first charge -->
 <section class="m-view" id="v-first" hidden>
 <p class="lead"><span data-lang="en">Your first charge is on <b data-f="first"></b>. Cancel now and you'll never be charged.</span><span data-lang="es" hidden>Su primer cobro es el <b data-f="first"></b>. Si cancela ahora, nunca se le cobrará.</span></p>
+<p data-founder hidden><span data-lang="en">You'll also give up your Founding Member number and founder pricing. Spots that are given up never reopen.</span><span data-lang="es" hidden>También renunciará a su número de Miembro Fundador y a su precio de fundador. Los lugares cedidos nunca se reabren.</span></p>
 <p class="m-err" data-err hidden></p>
 <button type="button" class="btn-orange" data-act="cancel_first"><span data-lang="en">Cancel my membership</span><span data-lang="es" hidden>Cancelar mi membresía</span></button>
 </section>
@@ -122,6 +123,7 @@ BoxedIn.initLang();
     if (typeof s.next_cents === "number") fill("price", usd(s.next_cents), usd(s.next_cents));
     if (typeof s.refund_cents === "number") fill("refund", usd(s.refund_cents), usd(s.refund_cents));
     var map = { before_first_charge: "first", refund_window: "refund", active: "active", canceled: "canceled", none: "none", not_holder: "not_holder", apple: "apple" };
+    document.querySelectorAll("[data-founder]").forEach(function (el) { el.hidden = !s.founding_member; });
     show(map[s.state] || "none");
   }
   function load() { return call("status").then(function (j) { if (j._status === 401) { show("phone"); return; } if (!j.ok) throw 0; render(j); }); }
