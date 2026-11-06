@@ -41,6 +41,14 @@
     Referrer-Policy = "no-referrer"
     X-Robots-Tag = "noindex"
 
+# Manage my membership (11-06-2026): signed-in page, never cached, never sent as a referrer, never indexed.
+[[headers]]
+  for = "/manage*"
+  [headers.values]
+    Cache-Control = "no-store"
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex"
+
 # Universal Links (11-04-2026): tells iPhones that BoxedIn (team 8JGAU4NY6D, app com.boxedinnyc.app)
 # may open boxedinnyc.com/email-confirmed links. Apple requires this file be served as JSON with no redirect.
 # No customer wording. Only the paths listed in the file open the app; every other page stays on the website.
