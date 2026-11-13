@@ -52,5 +52,32 @@ window.BoxedIn = (function () {
       }).catch(function () {});
   }
 
-  return { API: API, KEY: KEY, initLang: initLang, applyLang: applyLang, foundingSpots: foundingSpots, waivedSetups: waivedSetups };
+  // 11-13-2026 accessibility: when a page swaps screens, move focus to the new screen; read status changes aloud.
+  function watchViews(sel, skipForms) {
+    var main = document.querySelector("main");
+    if (!main || !window.MutationObserver) return;
+    var live = document.createElement("p"); live.className = "vh"; live.setAttribute("role", "status"); live.setAttribute("aria-live", "polite"); main.appendChild(live);
+    var lastView = null, lastText = null, lastLang = document.documentElement.lang, t = null;
+    function vis(el) { return !!(el && el.offsetParent !== null); }
+    function check() {
+      t = null;
+      var view = Array.prototype.filter.call(document.querySelectorAll(sel), vis)[0];
+      if (!view) return;
+      var h = Array.prototype.filter.call(view.querySelectorAll("h1,h2,.lead,p"), vis)[0];
+      var text = h ? h.textContent.trim() : "";
+      var langNow = document.documentElement.lang;
+      if (lastView === null || langNow !== lastLang) { lastView = view; lastText = text; lastLang = langNow; return; }
+      if (view !== lastView) {
+        lastView = view; lastText = text;
+        if (skipForms && view.querySelector("input:not([type=hidden]),textarea")) return;
+        if (h) { if (!h.hasAttribute("tabindex")) h.setAttribute("tabindex", "-1"); h.focus(); }
+        return;
+      }
+      if (text && text !== lastText) { lastText = text; live.textContent = text; }
+    }
+    new MutationObserver(function () { if (!t) t = setTimeout(check, 80); }).observe(main, { subtree: true, attributes: true, attributeFilter: ["hidden"] });
+    check();
+  }
+
+  return { API: API, KEY: KEY, initLang: initLang, applyLang: applyLang, foundingSpots: foundingSpots, waivedSetups: waivedSetups, watchViews: watchViews };
 })();
