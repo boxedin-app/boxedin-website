@@ -124,8 +124,8 @@ BoxedIn.initLang();
   var AUTH = BoxedIn.API + "/auth/v1", FN = BoxedIn.API + "/functions/v1/membership";
   var token = null, phone = null, st = null;   // sign-in lives in this page only (never saved)
   var MSG = {   // DRAFT error lines (pending Wanda's approval)
-    en: { phone: "Enter a 10-digit US phone number.", code: "That code didn't work. Check it and try again.", fail: "Something went wrong. Please try again.", deletion: "Your account is set to be deleted. Undo that in the BoxedIn app first." },
-    es: { phone: "Ingrese un número de teléfono de EE. UU. de 10 dígitos.", code: "Ese código no funcionó. Revíselo e intente de nuevo.", fail: "Algo salió mal. Intente de nuevo.", deletion: "Su cuenta está programada para eliminarse. Primero deshaga eso en la aplicación BoxedIn." }
+    en: { phone: "Enter a 10-digit US phone number.", code: "That code didn't work. Check it and try again.", codeEmpty: "Enter the 6-digit code we texted you.", fail: "Something went wrong. Please try again.", deletion: "Your account is set to be deleted. Undo that in the BoxedIn app first." },
+    es: { phone: "Ingrese un número de teléfono de EE. UU. de 10 dígitos.", code: "Ese código no funcionó. Revíselo e intente de nuevo.", codeEmpty: "Ingrese el código de 6 dígitos que le enviamos por texto.", fail: "Algo salió mal. Intente de nuevo.", deletion: "Su cuenta está programada para eliminarse. Primero deshaga eso en la aplicación BoxedIn." }
   };
   var MES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
   var MEN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -179,7 +179,7 @@ BoxedIn.initLang();
   document.getElementById("f-code").addEventListener("submit", function (e) {
     e.preventDefault();
     var c = document.getElementById("code").value.replace(/\D/g, "");
-    if (c.length !== 6) { err("code"); return; }
+    if (c.length !== 6) { err("codeEmpty"); return; }
     var b = e.submitter; busy(b, true);
     fetch(AUTH + "/verify", { method: "POST", headers: { apikey: BoxedIn.KEY, "Content-Type": "application/json" }, body: JSON.stringify({ type: "sms", phone: phone, token: c }) })
       .then(function (r) { return r.ok ? r.json() : null; })
