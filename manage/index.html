@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Manage my membership | BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-03-2026"><link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta property="og:image" content="https://boxedinnyc.com/share-image.png"><meta property="og:image:width" content="512"><meta property="og:image:height" content="512">
+<title>Manage my membership | BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-03-2026"><link rel="icon" href="/favicon.ico?v=11-12-2026" sizes="48x48"><link rel="icon" href="/favicon-32.png?v=11-12-2026" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=11-12-2026"><meta property="og:image" content="https://boxedinnyc.com/share-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="BoxedIn. A quieter way to handle double parking. Scan. Don't Honk."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://boxedinnyc.com/share-card.png">
 <!-- Manage my membership (11-06-2026). Wording approved by Wanda 11-06-2026. NY General Business Law 527-a(1)(d): members who
      joined on the website can cancel online, any time, as easily as they joined. One confirm step, no "are you sure" offers. -->
 <style>
@@ -8,8 +8,9 @@
 .m-err{color:#B3261E;margin:0 0 16px}
 .m-view .btn-orange,.m-view .btn-outline{margin-top:8px}
 .m-foot{margin-top:32px}
+.m-link{background:none;border:0;padding:12px 0;min-height:44px;font:inherit;color:var(--text);text-decoration:underline;cursor:pointer}
 </style></head><body class="scan"><div class="wrap">
-<header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
+<header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't Honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
 <div class="lang-pill" role="group" aria-label="Language / Idioma"><button type="button" data-switch="en" aria-pressed="true" aria-label="English"><span>EN</span></button><button type="button" data-switch="es" aria-pressed="false" aria-label="Español"><span>ES</span></button></div></header>
 <span data-title-en="Manage my membership | BoxedIn" data-title-es="Administrar mi membresía | BoxedIn" hidden></span>
 <main>
@@ -39,6 +40,8 @@
 <section class="m-view" id="v-active" hidden>
 <p class="lead"><span data-lang="en">Your membership renews on <b data-f="renews"></b> at <b data-f="price"></b> a year, plus tax where applicable.</span><span data-lang="es" hidden>Su membresía se renueva el <b data-f="renews"></b> por <b data-f="price"></b> al año, más impuestos donde correspondan.</span></p>
 <button type="button" class="btn-orange" data-go="confirm"><span data-lang="en">Cancel renewal</span><span data-lang="es" hidden>Cancelar renovación</span></button>
+<p class="m-err" data-err hidden></p>
+<p><button type="button" class="m-link" data-act="update_card"><span data-lang="en">Update my card</span><span data-lang="es" hidden>Actualizar mi tarjeta</span></button></p>
 </section>
 
 <!-- 3b. Confirm -->
@@ -70,10 +73,31 @@
 <p class="m-err" data-err hidden></p>
 <button type="button" class="btn-orange" data-act="refund_cancel"><span data-lang="en">Cancel and refund</span><span data-lang="es" hidden>Cancelar y reembolsar</span></button>
 </section>
+<!-- 3f. A payment didn't go through (11-07-2026, migration 0056; wording approved by Wanda 11-06-2026) -->
+<section class="m-view" id="v-failed" hidden>
+<p class="lead"><span data-lang="en">Your last payment didn't go through. Update your card by <b data-f="payby"></b> to keep BoxedIn. Your sticker keeps working until then.</span><span data-lang="es" hidden>Su último pago no se pudo procesar. Actualice su tarjeta antes del <b data-f="payby"></b> para conservar BoxedIn. Su calcomanía sigue funcionando hasta esa fecha.</span></p>
+<p class="m-err" data-err hidden></p>
+<button type="button" class="btn-orange" data-act="update_card"><span data-lang="en">Update my card</span><span data-lang="es" hidden>Actualizar mi tarjeta</span></button>
+<p data-founder hidden><span data-lang="en">You'll also give up your Founding Member number and founder pricing. Spots that are given up never reopen.</span><span data-lang="es" hidden>También renunciará a su número de Miembro Fundador y a su precio de fundador. Los lugares cedidos nunca se reabren.</span></p>
+<button type="button" class="btn-outline" data-go="confirmfailed"><span data-lang="en">Cancel my membership</span><span data-lang="es" hidden>Cancelar mi membresía</span></button>
+</section>
+<!-- 3f-2. Confirm cancel after a declined card (wording approved by Wanda 11-07-2026) -->
+<section class="m-view" id="v-confirmfailed" hidden>
+<p class="lead"><span data-lang="en">Cancel your membership? Your sticker stops working right away. You won't be charged.</span><span data-lang="es" hidden>¿Cancelar su membresía? Su calcomanía deja de funcionar de inmediato. No se le cobrará.</span></p>
+<p data-founder hidden><span data-lang="en">You'll also give up your Founding Member number and founder pricing. Spots that are given up never reopen.</span><span data-lang="es" hidden>También renunciará a su número de Miembro Fundador y a su precio de fundador. Los lugares cedidos nunca se reabren.</span></p>
+<p class="m-err" data-err hidden></p>
+<button type="button" class="btn-orange" data-act="cancel_failed"><span data-lang="en">Yes, cancel my membership</span><span data-lang="es" hidden>Sí, cancelar mi membresía</span></button>
+<button type="button" class="btn-outline" data-go="failed"><span data-lang="en">Keep my membership</span><span data-lang="es" hidden>Conservar mi membresía</span></button>
+</section>
+<!-- 3g. Back from Stripe after saving a new card (no sign-in needed) -->
+<section class="m-view" id="v-cardupdated" hidden>
+<p class="lead"><span data-lang="en">Your card is updated.<span data-retry hidden> We're trying the payment again now. You'll get an email when it goes through.</span></span><span data-lang="es" hidden>Su tarjeta quedó actualizada.<span data-retry hidden> Estamos intentando el pago de nuevo. Recibirá un correo cuando se procese.</span></span></p>
+</section>
 
 <!-- DRAFT lines below (pending Wanda's approval): states the approved table does not cover -->
 <section class="m-view" id="v-ended" hidden>
 <p class="lead" data-ended="first"><span data-lang="en">Your membership is canceled. You'll never be charged.</span><span data-lang="es" hidden>Su membresía está cancelada. Nunca se le cobrará.</span></p>
+<p class="lead" data-ended="failed" hidden><span data-lang="en">Your membership is canceled. You won't be charged.</span><span data-lang="es" hidden>Su membresía está cancelada. No se le cobrará.</span></p>
 <p class="lead" data-ended="refund" hidden><span data-lang="en">Your membership is canceled. We've refunded <b data-f="refunded"></b> to your card ending in <b data-f="last4"></b>.</span><span data-lang="es" hidden>Su membresía está cancelada. Le reembolsamos <b data-f="refunded"></b> a su tarjeta terminada en <b data-f="last4"></b>.</span></p>
 </section>
 <section class="m-view" id="v-none" hidden>
@@ -88,7 +112,7 @@
 
 <p class="m-foot muted"><span data-lang="en">Questions? Email <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</span><span data-lang="es" hidden>¿Preguntas? Escríbanos a <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</span></p>
 </main>
-<footer><nav><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/refunds.html">Refunds &amp; Cancellation</a><a href="/contact.html">Contact</a></nav>
+<footer><nav><a href='/terms'>Terms</a><a href='/privacy'>Privacy</a><a href='/refunds'>Refunds &amp; Cancellation</a><a href="/accessibility">Accessibility</a><a href='/contact'>Contact</a></nav>
 <p>&copy; 2026 BoxedIn LLC, a New York limited liability company. Questions: <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</p><p>BoxedIn is a trademark of BoxedIn LLC.</p></footer>
 </div>
 <script src="/site.js?v=11-03-2026"></script>
@@ -122,11 +146,18 @@ BoxedIn.initLang();
     fillDate("renews", s.renews_on); fillDate("first", s.first_charge_on); fillDate("charged", s.charged_on); fillDate("refunduntil", s.refund_until);
     if (typeof s.next_cents === "number") fill("price", usd(s.next_cents), usd(s.next_cents));
     if (typeof s.refund_cents === "number") fill("refund", usd(s.refund_cents), usd(s.refund_cents));
-    var map = { before_first_charge: "first", refund_window: "refund", active: "active", canceled: "canceled", none: "none", not_holder: "not_holder", apple: "apple" };
+    fillDate("payby", s.pay_by);
+    var map = { before_first_charge: "first", refund_window: "refund", active: "active", canceled: "canceled", payment_failed: "failed", none: "none", not_holder: "not_holder", apple: "apple" };
     document.querySelectorAll("[data-founder]").forEach(function (el) { el.hidden = !s.founding_member; });
     show(map[s.state] || "none");
   }
   function load() { return call("status").then(function (j) { if (j._status === 401) { show("phone"); return; } if (!j.ok) throw 0; render(j); }); }
+
+  if (/[?&]card=updated(&|$)/.test(location.search)) {   // back from Stripe's card page
+    var retry = false; try { retry = sessionStorage.getItem("bx_retry") === "1"; sessionStorage.removeItem("bx_retry"); } catch (e) {}
+    document.querySelectorAll("[data-retry]").forEach(function (el) { el.hidden = !retry; });   // the retry line only after a failed payment
+    show("cardupdated");
+  }
 
   document.getElementById("f-phone").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -162,10 +193,19 @@ BoxedIn.initLang();
         if (j._status === 401) { show("phone"); return; }
         if (j.error === "deletion_scheduled") { err("deletion"); return; }
         if (!j.ok) { err("fail"); return; }
-        if (act === "cancel_first") { show("ended"); document.querySelector('[data-ended="first"]').hidden = false; document.querySelector('[data-ended="refund"]').hidden = true; return; }
+        if (act === "update_card") {
+          if (!j.url) { err("fail"); return; }
+          try { sessionStorage.setItem("bx_retry", st && st.state === "payment_failed" ? "1" : "0"); } catch (e) {}
+          location.href = j.url; return;
+        }
+        if (act === "cancel_first" || act === "cancel_failed") {
+          show("ended");
+          document.querySelectorAll("[data-ended]").forEach(function (el) { el.hidden = el.getAttribute("data-ended") !== (act === "cancel_first" ? "first" : "failed"); });
+          return;
+        }
         if (act === "refund_cancel") {
           fill("refunded", usd(j.refund_cents), usd(j.refund_cents)); fill("last4", j.last4 || "", j.last4 || "");
-          show("ended"); document.querySelector('[data-ended="first"]').hidden = true; document.querySelector('[data-ended="refund"]').hidden = false; return;
+          show("ended"); document.querySelectorAll("[data-ended]").forEach(function (el) { el.hidden = el.getAttribute("data-ended") !== "refund"; }); return;
         }
         return load();
       }).catch(function () { err("fail"); }).finally(function () { busy(b, false); });
