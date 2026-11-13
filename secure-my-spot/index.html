@@ -1,0 +1,197 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Secure your founder spot | BoxedIn</title><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-03-2026"><link rel="icon" href="/favicon.ico?v=11-12-2026" sizes="48x48"><link rel="icon" href="/favicon-32.png?v=11-12-2026" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=11-12-2026"><meta property="og:image" content="https://boxedinnyc.com/share-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="BoxedIn. A quieter way to handle double parking. Scan. Don't Honk."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://boxedinnyc.com/share-card.png">
+<!-- Secure my founder spot (11-12-2026). Wording rows 2 to 15 APPROVED by Wanda 11-12-2026
+     (claude/boxedin-web-reservation-plan-11-12-2026.md). Error lines marked DRAFT wait for approval.
+     Steps: ZIP first (outside NYC: waitlist, no card) > name, email, mobile > text code > terms > Stripe saves the card (no charge).
+     Lex conditions: terms shown before the button, consent line above it, nothing charged today, cancel online at /manage. -->
+<style>
+.m-field{display:block;width:100%;box-sizing:border-box;font:inherit;font-size:20px;padding:14px 16px;border:1.5px solid var(--text);border-radius:14px;background:var(--surface);color:var(--text);margin:0 0 16px}
+.m-field.code{letter-spacing:6px;text-align:center}
+.m-err{color:#B3261E;margin:0 0 16px}
+.m-view .btn-orange,.m-view .btn-outline{margin-top:8px}
+.m-terms p{margin:0 0 12px}
+.m-consent{font-size:15px}
+.m-price{margin:8px 0 24px}.m-price .price{margin:0 0 12px}.m-price p{margin:0 0 10px}
+.m-key{font-size:19px;margin:0 0 20px}
+.m-small p{font-size:15px;color:var(--secondary);margin:0 0 10px}
+.m-small{margin:0 0 20px}
+/* Wanda 11-12-2026: buttons sized to their words, not the full page width (this page only) */
+.m-view .btn-orange{display:inline-block;width:auto;min-width:200px;padding:14px 32px;font-size:18px}
+</style></head><body class="scan"><div class="wrap">
+<header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't Honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
+<div class="lang-pill" role="group" aria-label="Language / Idioma"><button type="button" data-switch="en" aria-pressed="true" aria-label="English"><span>EN</span></button><button type="button" data-switch="es" aria-pressed="false" aria-label="Español"><span>ES</span></button></div></header>
+<span data-title-en="Secure your founder spot | BoxedIn" data-title-es="Asegure su lugar de fundador | BoxedIn" hidden></span>
+<main>
+<h1 class="oz"><span data-lang="en">Secure your founder spot</span><span data-lang="es" hidden>Asegure su lugar de fundador</span></h1>
+<p class="lead" id="intro"><span data-lang="en">Save your card today and lock in your founder number and price. You won't be charged today.</span><span data-lang="es" hidden>Guarde su tarjeta hoy y asegure su número y su precio de fundador. No se le cobrará hoy.</span></p>
+
+<!-- 1. Home ZIP (row 4) -->
+<section class="m-view" id="v-zip">
+<form id="f-zip" novalidate>
+<label class="notelabel" for="zip"><span data-lang="en">Home ZIP code</span><span data-lang="es" hidden>Código postal de su casa</span></label>
+<input class="m-field" id="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" required>
+<p class="m-err" data-err role="alert" hidden></p>
+<button type="submit" class="btn-orange"><span data-lang="en">Continue</span><span data-lang="es" hidden>Continuar</span></button>
+</form>
+</section>
+
+<!-- 1b. Outside NYC (row 5): no card -->
+<section class="m-view" id="v-out" hidden>
+<p class="lead"><span data-lang="en">BoxedIn is only in New York City for now.</span><span data-lang="es" hidden>Por ahora, BoxedIn solo está disponible en la ciudad de Nueva York.</span></p>
+<a class="btn-orange" href="/waitlist"><span data-lang="en">Join the waitlist</span><span data-lang="es" hidden>Unirme a la lista de espera</span></a>
+</section>
+
+<!-- 2. Name, email, mobile (rows 6 and 7) -->
+<section class="m-view" id="v-details" hidden>
+<form id="f-details" novalidate>
+<label class="notelabel" for="first"><span data-lang="en">First Name</span><span data-lang="es" hidden>Nombre</span></label>
+<input class="m-field" id="first" type="text" autocomplete="given-name" required>
+<label class="notelabel" for="last"><span data-lang="en">Last Name</span><span data-lang="es" hidden>Apellido</span></label>
+<input class="m-field" id="last" type="text" autocomplete="family-name" required>
+<label class="notelabel" for="email"><span data-lang="en">Email</span><span data-lang="es" hidden>Correo electrónico</span></label>
+<input class="m-field" id="email" type="email" autocomplete="email" required>
+<label class="notelabel" for="phone"><span data-lang="en">Mobile Number</span><span data-lang="es" hidden>Número de celular</span></label>
+<input class="m-field" id="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(212) 555-0101" aria-describedby="phone-help" required>
+<p class="small muted" id="phone-help"><span data-lang="en">We'll text you a code to confirm your number. Message and data rates may apply.</span><span data-lang="es" hidden>Le enviaremos un código por mensaje de texto para confirmar su número. Pueden aplicarse tarifas de mensajes y datos.</span></p>
+<p class="m-err" data-err role="alert" hidden></p>
+<button type="submit" class="btn-orange"><span data-lang="en">Text me a code</span><span data-lang="es" hidden>Envíenme un código</span></button>
+</form>
+</section>
+
+<!-- 3. Code (row 8) -->
+<section class="m-view" id="v-code" hidden>
+<form id="f-code" novalidate>
+<label class="notelabel" for="code"><span data-lang="en">Enter the 6-digit code</span><span data-lang="es" hidden>Escriba el código de 6 dígitos</span></label>
+<input class="m-field code" id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required>
+<p class="m-err" data-err role="alert" hidden></p>
+<button type="submit" class="btn-orange"><span data-lang="en">Continue</span><span data-lang="es" hidden>Continuar</span></button>
+</form>
+</section>
+
+<!-- 4. Terms and Save my card (rows 9 to 15) -->
+<section class="m-view m-terms" id="v-terms" hidden>
+<div class="card m-price"><div class="price">$27.99</div>
+<p><span data-lang="en">$27.99 for your first year, plus tax where applicable. Your second year renews at $27.99, plus tax where applicable. Your membership renews each year until you cancel.</span><span data-lang="es" hidden>Su primer año cuesta $27.99, más impuestos donde correspondan. Su segundo año se renueva a $27.99, más impuestos donde correspondan. Su membresía se renueva cada año hasta que la cancele.</span></p>
+<p id="setup-waived" hidden><span data-lang="en">First 100 founders: $9.99 setup waived.</span><span data-lang="es" hidden>Los primeros 100 fundadores tienen la configuración de $9.99 eximida.</span></p>
+<p id="setup-fee" hidden><span data-lang="en">One-time setup: $9.99, plus tax where applicable.</span><span data-lang="es" hidden>Configuración única: $9.99, más impuestos donde correspondan.</span></p>
+</div>
+<p class="m-key"><span data-lang="en"><strong>Your card is saved today. You won't be charged today.</strong> We charge your card only after you finish sign-up in the BoxedIn app (ID check and your car), on or after November 23.</span><span data-lang="es" hidden><strong>Su tarjeta queda guardada hoy. No se le cobrará hoy.</strong> Solo cobramos su tarjeta después de que termine su inscripción en la aplicación BoxedIn (verificación de identidad y su carro), el 23 de noviembre o después.</span></p>
+<div class="m-small"><p><span data-lang="en">Cancel anytime online at <a href="/manage">boxedinnyc.com/manage</a>.</span><span data-lang="es" hidden>Cancele cuando quiera en línea en <a href="/manage?lang=es">boxedinnyc.com/manage</a>.</span></p>
+<p><span data-lang="en">If you don't finish sign-up within 14 days after we email you the app link, we'll remove your card and release your spot. You won't be charged.</span><span data-lang="es" hidden>Si no termina su inscripción en un plazo de 14 días después de que le enviemos el enlace de la aplicación, eliminaremos su tarjeta y liberaremos su lugar. No se le cobrará.</span></p></div>
+<p class="m-consent"><span data-lang="en">By tapping Save my card, you confirm you're 18 or older, agree to the <a href="/terms">Terms of Service</a> and <a href="/terms#guidelines">Community Guidelines</a>, acknowledge the <a href="/privacy">Privacy Policy</a>, and allow BoxedIn to charge this card as described above.</span><span data-lang="es" hidden>Al tocar Guardar mi tarjeta, usted confirma que tiene 18 años o más, acepta los <a href="/terms">Términos de servicio</a> y las <a href="/terms#normas">Normas de la comunidad</a>, reconoce la <a href="/privacy">Política de privacidad</a> y autoriza a BoxedIn a cobrar esta tarjeta como se describe arriba.</span></p>
+<p class="m-err" data-err role="alert" hidden></p>
+<button type="button" class="btn-orange" id="save-card"><span data-lang="en">Save my card</span><span data-lang="es" hidden>Guardar mi tarjeta</span></button>
+</section>
+</main>
+<footer><nav><a href='/terms'>Terms</a><a href='/privacy'>Privacy</a><a href='/refunds'>Refunds &amp; Cancellation</a><a href="/accessibility">Accessibility</a><a href='/contact'>Contact</a></nav>
+<p>&copy; 2026 BoxedIn LLC, a New York limited liability company. Questions: <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</p><p>BoxedIn is a trademark of BoxedIn LLC.</p></footer>
+</div>
+<script src="/site.js?v=11-03-2026"></script>
+<script>
+BoxedIn.initLang();
+(function () {
+  var AUTH = BoxedIn.API + "/auth/v1", FN = BoxedIn.API + "/functions/v1/reserve";
+  var token = null, phone = null, zip = null;
+  var MSG = {   // phone, code, fail: same DRAFT lines as /manage. The rest: NEW DRAFT lines. All wait for Wanda's approval.
+    en: { phone: "Enter a 10-digit US phone number.", code: "That code didn't work. Check it and try again.", fail: "Something went wrong. Please try again.",
+          zip: "Enter a 5-digit ZIP code.", name: "Enter your first and last name.", email: "Check your email address.",
+          full: "All 500 founder spots are taken.", member: "This phone number already has a BoxedIn membership. You can manage it at boxedinnyc.com/manage." },
+    es: { phone: "Ingrese un número de teléfono de EE. UU. de 10 dígitos.", code: "Ese código no funcionó. Revíselo e intente de nuevo.", fail: "Algo salió mal. Intente de nuevo.",
+          zip: "Ingrese un código postal de 5 dígitos.", name: "Ingrese su nombre y apellido.", email: "Revise su correo electrónico.",
+          full: "Ya se ocuparon los 500 lugares de fundador.", member: "Este número de teléfono ya tiene una membresía de BoxedIn. Puede administrarla en boxedinnyc.com/manage." }
+  };
+  var CODES = { zip_invalid: "zip", name_required: "name", email_invalid: "email", founder_full: "full", already_member: "member" };
+  function lang() { return document.documentElement.lang === "es" ? "es" : "en"; }
+  function show(id) { document.querySelectorAll(".m-view").forEach(function (v) { v.hidden = v.id !== "v-" + id; }); document.getElementById("intro").hidden = id === "out"; clearErr(); }
+  function clearErr() { document.querySelectorAll("[data-err]").forEach(function (e) { e.hidden = true; e.textContent = ""; }); }
+  function err(key) { var v = document.querySelector(".m-view:not([hidden]) [data-err]"); if (v) { v.textContent = MSG[lang()][key] || MSG[lang()].fail; v.hidden = false; v.focus && v.focus(); } }
+  function busy(b, on) { if (b) b.disabled = on; }
+  function val(id) { return document.getElementById(id).value.trim(); }
+  function rpc(fn, body) {
+    return fetch(BoxedIn.API + "/rest/v1/rpc/" + fn, { method: "POST", headers: { apikey: BoxedIn.KEY, "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })
+      .then(function (r) { return r.ok ? r.json() : null; });
+  }
+  function call(body) {
+    return fetch(FN, { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token, apikey: BoxedIn.KEY }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { j._status = r.status; return j; }); });
+  }
+  // This tab only (cleared when the tab closes): lets "back from Stripe" and /secured work without a second code.
+  function keep() { try { sessionStorage.setItem("bx_res_token", token);
+    sessionStorage.setItem("bx_res_form", JSON.stringify({ first: val("first"), last: val("last"), email: val("email"), zip: zip })); } catch (e) {} }
+  function restore() { try { var f = JSON.parse(sessionStorage.getItem("bx_res_form") || "{}");
+    ["first", "last", "email"].forEach(function (k) { if (f[k]) document.getElementById(k).value = f[k]; }); zip = f.zip || null; } catch (e) {} }
+  function setupLine() {   // row 10: the server count decides which setup line shows
+    rpc("setup_waiver_status").then(function (rows) {
+      var row = Array.isArray(rows) ? rows[0] : rows;
+      var waived = !!(row && typeof row.waivers_left === "number" && row.waivers_left > 0);
+      document.getElementById("setup-waived").hidden = !waived;
+      document.getElementById("setup-fee").hidden = waived;
+    }).catch(function () { document.getElementById("setup-fee").hidden = false; });
+  }
+
+  // Back from Stripe without saving: signed in still (this tab), show the terms again
+  if (/[?&]canceled=1(&|$)/.test(location.search)) {
+    try { token = sessionStorage.getItem("bx_res_token"); } catch (e) {}
+    if (token) { restore(); setupLine(); show("terms"); }
+  }
+
+  document.getElementById("f-zip").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var z = val("zip").replace(/\D/g, "");
+    if (z.length !== 5) { err("zip"); return; }
+    var b = e.submitter; busy(b, true);
+    rpc("zip_in_service", { p_zip: z }).then(function (ok) {
+      if (ok === true) { zip = z; show("details"); document.getElementById("first").focus(); }
+      else if (ok === false) { show("out"); }
+      else { err("fail"); }
+    }).catch(function () { err("fail"); }).finally(function () { busy(b, false); });
+  });
+
+  document.getElementById("f-details").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!val("first") || !val("last")) { err("name"); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val("email"))) { err("email"); return; }
+    var d = val("phone").replace(/\D/g, "");
+    if (d.length === 11 && d[0] === "1") d = d.slice(1);
+    if (d.length !== 10) { err("phone"); return; }
+    phone = "+1" + d;
+    var b = e.submitter; busy(b, true);
+    fetch(AUTH + "/otp", { method: "POST", headers: { apikey: BoxedIn.KEY, "Content-Type": "application/json" }, body: JSON.stringify({ phone: phone, create_user: true }) })
+      .then(function (r) { if (r.status === 429 || r.status >= 500) throw 0; show("code"); document.getElementById("code").focus(); })
+      .catch(function () { err("fail"); }).finally(function () { busy(b, false); });
+  });
+
+  document.getElementById("f-code").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var c = val("code").replace(/\D/g, "");
+    if (c.length !== 6) { err("code"); return; }
+    var b = e.submitter; busy(b, true);
+    fetch(AUTH + "/verify", { method: "POST", headers: { apikey: BoxedIn.KEY, "Content-Type": "application/json" }, body: JSON.stringify({ type: "sms", phone: phone, token: c }) })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.access_token) { err("code"); return; }
+        token = j.access_token; keep();
+        return call({ action: "status" }).then(function (s) {
+          if (s && s.status === "reserved") { location.href = "/secured/?lang=" + lang(); return; }   // already secured
+          setupLine(); show("terms");
+        });
+      })
+      .catch(function () { err("fail"); }).finally(function () { busy(b, false); });
+  });
+
+  document.getElementById("save-card").addEventListener("click", function () {
+    var b = this; busy(b, true); clearErr();
+    call({ action: "start", first_name: val("first"), last_name: val("last"), email: val("email"), zip: zip || val("zip"),
+           language: lang(), terms_version: "reserve-row14-" + lang() + "-11-12-2026" })
+      .then(function (j) {
+        if (j._status === 401) { show("details"); err("fail"); return; }
+        if (j.ok === false && j.outside_service_area) { show("out"); return; }
+        if (j.error === "already_secured") { location.href = "/secured/?lang=" + lang(); return; }
+        if (!j.ok || !j.url) { err(CODES[j.error] || "fail"); return; }
+        location.href = j.url;
+      })
+      .catch(function () { err("fail"); }).finally(function () { busy(b, false); });
+  });
+})();
+</script>
+</body></html>
