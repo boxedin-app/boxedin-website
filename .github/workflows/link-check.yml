@@ -1,0 +1,74 @@
+# BoxedIn website: missing-file check (added 11-13-2026, Wanda's OK).
+# Runs on every pull request and every push to main. Fails (red X) if any
+# page, sitemap.xml or robots.txt points to a boxedinnyc.com file that is
+# not in the repository and is not covered by a netlify.toml redirect.
+# It changes nothing on the site. No secrets are used.
+name: Missing-file check
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check every link to a site file
+        shell: python
+        run: |
+          import os, re, sys, fnmatch, json
+          from urllib.parse import urlsplit, unquote
+          root = "."
+          files = set()
+          for d, dirs, fs in os.walk(root):
+              dirs[:] = [x for x in dirs if x != ".git"]
+              for f in fs:
+                  files.add("/" + os.path.relpath(os.path.join(d, f), root).replace(os.sep, "/"))
+          redirects = re.findall(r'from\s*=\s*"([^"]+)"', open("netlify.toml", encoding="utf-8").read()) if os.path.exists("netlify.toml") else []
+          def exists(p):
+              p = unquote(p)
+              if p in files: return True
+              if p.endswith("/") and p + "index.html" in files: return True
+              if p + "/index.html" in files or p + ".html" in files: return True
+              return any(fnmatch.fnmatchcase(p, r) or fnmatch.fnmatchcase(p.rstrip("/"), r) for r in redirects)
+          attr = re.compile(r'\b(src|href|poster|content|data-src)\s*=\s*"([^"]+)"', re.I)
+          absurl = re.compile(r'https?://(?:www\.)?boxedinnyc\.com(/[^\s"\'<>)\\]*)?')
+          problems = []
+          def check(page, ref):
+              if not ref or ref.startswith(("#", "mailto:", "tel:", "sms:", "data:", "javascript:", "blob:")): return
+              u = urlsplit(ref)
+              if u.scheme in ("http", "https"):
+                  if not re.fullmatch(r'(www\.)?boxedinnyc\.com', u.netloc or ""): return
+                  path = u.path or "/"
+              elif u.scheme or ref.startswith("//"):
+                  return
+              else:
+                  path = u.path
+                  if not path: return
+                  if not path.startswith("/"):
+                      base = page.rsplit("/", 1)[0] + "/"
+                      path = os.path.normpath(base + path).replace(os.sep, "/") + ("/" if path.endswith("/") else "")
+              if not exists(path):
+                  problems.append(f"{page}: points to {path} (not found)")
+          for f in sorted(files):
+              if f.startswith("/.github/"): continue
+              if f.endswith((".html", ".xml", ".txt", ".webmanifest")):
+                  t = open("." + f, encoding="utf-8", errors="replace").read()
+                  if f.endswith(".html"):
+                      for m in attr.finditer(t):
+                          a, v = m.group(1).lower(), m.group(2)
+                          if a == "content" and not v.startswith(("http", "/")): continue
+                          if v.startswith(("/", "http", ".")) or "/" in v or re.search(r'\.(mp4|vtt|jpg|jpeg|png|svg|ico|css|js|html|xml|pdf|webp)(\?|$)', v):
+                              if " " in v.strip() and not v.startswith(("http", "/")): continue
+                              check(f, v.strip())
+                  for m in absurl.finditer(t):
+                      check(f, m.group(0))
+          problems = sorted(set(problems))
+          if problems:
+              print("Links to files that do not exist:")
+              for p in problems: print("  - " + p)
+              print(f"::error::{len(problems)} link(s) point to missing files. Fix them before merging.")
+              sys.exit(1)
+          print(f"OK: every link to a site file exists ({len(files)} files checked).")
