@@ -17,6 +17,59 @@
   status = 302
   force = true
 
+# Scan Spot store links (11-08-2026, approved by Wanda): Total Wireless, 4 Bronx stores.
+# Each store has its own PERMANENT address, printed on its counter flyer QR code. Never remove or reuse these.
+# Before launch they forward to the Total Wireless waitlist page (Mailchimp, auto-tag "Scan Spot: Total Wireless").
+# After launch, change only the "to" lines (e.g. to app sign-up carrying the store code). Printed QR codes keep working.
+# Store 1 YQA5SP, Store 2 SK6QVH, Store 3 2B7W9Z, Store 4 NXKXWX. Lowercase versions forward too.
+[[redirects]]
+  from = "/spot/YQA5SP"
+  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/spot/yqa5sp"
+  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/spot/SK6QVH"
+  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/spot/sk6qvh"
+  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/spot/2B7W9Z"
+  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/spot/2b7w9z"
+  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/spot/NXKXWX"
+  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/spot/nxkxwx"
+  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  status = 302
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -44,6 +97,21 @@
 # Manage my membership (11-06-2026): signed-in page, never cached, never sent as a referrer, never indexed.
 [[headers]]
   for = "/manage*"
+  [headers.values]
+    Cache-Control = "no-store"
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex"
+
+# After Stripe checkout (11-06-2026, wording approved by Wanda): card saved / no card saved. Never cached or indexed.
+[[headers]]
+  for = "/card-saved*"
+  [headers.values]
+    Cache-Control = "no-store"
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/checkout-canceled*"
   [headers.values]
     Cache-Control = "no-store"
     Referrer-Policy = "no-referrer"
