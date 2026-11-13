@@ -1,19 +1,21 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Manage my membership | BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-03-2026"><link rel="icon" href="/favicon.ico?v=11-12-2026" sizes="48x48"><link rel="icon" href="/favicon-32.png?v=11-12-2026" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=11-12-2026"><meta property="og:image" content="https://boxedinnyc.com/share-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="BoxedIn. A quieter way to handle double parking. Scan. Don't Honk."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://boxedinnyc.com/share-card.png">
+<title>Manage my membership | BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-13-2026"><link rel="icon" href="/favicon.ico?v=11-12-2026" sizes="48x48"><link rel="icon" href="/favicon-32.png?v=11-12-2026" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=11-12-2026"><meta property="og:image" content="https://boxedinnyc.com/share-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="BoxedIn. A quieter way to handle double parking. Scan. Don't Honk."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://boxedinnyc.com/share-card.png">
 <!-- Manage my membership (11-06-2026). Wording approved by Wanda 11-06-2026. NY General Business Law 527-a(1)(d): members who
      joined on the website can cancel online, any time, as easily as they joined. One confirm step, no "are you sure" offers. -->
 <style>
 .m-field{display:block;width:100%;box-sizing:border-box;font:inherit;font-size:20px;padding:14px 16px;border:1.5px solid var(--text);border-radius:14px;background:var(--surface);color:var(--text);margin:0 0 16px}
 .m-field.code{letter-spacing:6px;text-align:center}
 .m-err{color:#B3261E;margin:0 0 16px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .m-err{color:#FF8A80}}
+:root[data-theme="dark"] .m-err{color:#FF8A80}
 .m-view .btn-orange,.m-view .btn-outline{margin-top:8px}
 .m-foot{margin-top:32px}
 .m-link{background:none;border:0;padding:12px 0;min-height:44px;font:inherit;color:var(--text);text-decoration:underline;cursor:pointer}
-</style></head><body class="scan"><div class="wrap">
+</style></head><body class="scan"><a class="skip" href="#main"><span data-lang="en">Skip to main content</span><span data-lang="es" hidden>Saltar al contenido principal</span></a><div class="wrap">
 <header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't Honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
-<div class="lang-pill" role="group" aria-label="Language / Idioma"><button type="button" data-switch="en" aria-pressed="true" aria-label="English"><span>EN</span></button><button type="button" data-switch="es" aria-pressed="false" aria-label="Español"><span>ES</span></button></div></header>
+<div class="lang-pill" role="group" aria-label="Language / Idioma"><button type="button" data-switch="en" aria-pressed="true" aria-label="EN, English"><span>EN</span></button><button type="button" data-switch="es" aria-pressed="false" aria-label="ES, Español" lang="es"><span>ES</span></button></div></header>
 <span data-title-en="Manage my membership | BoxedIn" data-title-es="Administrar mi membresía | BoxedIn" hidden></span>
-<main>
+<main id="main" tabindex="-1">
 <h1 class="oz"><span data-lang="en">Manage my membership</span><span data-lang="es" hidden>Administrar mi membresía</span></h1>
 
 <!-- 1. Phone number -->
@@ -21,7 +23,7 @@
 <form id="f-phone" novalidate>
 <label class="notelabel" for="phone"><span data-lang="en">Enter the phone number on your BoxedIn account.</span><span data-lang="es" hidden>Ingrese el número de teléfono de su cuenta de BoxedIn.</span></label>
 <input class="m-field" id="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(212) 555-0101" required>
-<p class="m-err" data-err hidden></p>
+<p class="m-err" data-err role="alert" hidden></p>
 <button type="submit" class="btn-orange"><span data-lang="en">Text me a code</span><span data-lang="es" hidden>Envíenme un código</span></button>
 </form>
 </section>
@@ -31,7 +33,7 @@
 <form id="f-code" novalidate>
 <label class="notelabel" for="code"><span data-lang="en">Enter the 6-digit code we texted you.</span><span data-lang="es" hidden>Ingrese el código de 6 dígitos que le enviamos.</span></label>
 <input class="m-field code" id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required>
-<p class="m-err" data-err hidden></p>
+<p class="m-err" data-err role="alert" hidden></p>
 <button type="submit" class="btn-orange"><span data-lang="en">Continue</span><span data-lang="es" hidden>Continuar</span></button>
 </form>
 </section>
@@ -40,14 +42,14 @@
 <section class="m-view" id="v-active" hidden>
 <p class="lead"><span data-lang="en">Your membership renews on <b data-f="renews"></b> at <b data-f="price"></b> a year, plus tax where applicable.</span><span data-lang="es" hidden>Su membresía se renueva el <b data-f="renews"></b> por <b data-f="price"></b> al año, más impuestos donde correspondan.</span></p>
 <button type="button" class="btn-orange" data-go="confirm"><span data-lang="en">Cancel renewal</span><span data-lang="es" hidden>Cancelar renovación</span></button>
-<p class="m-err" data-err hidden></p>
+<p class="m-err" data-err role="alert" hidden></p>
 <p><button type="button" class="m-link" data-act="update_card"><span data-lang="en">Update my card</span><span data-lang="es" hidden>Actualizar mi tarjeta</span></button></p>
 </section>
 
 <!-- 3b. Confirm -->
 <section class="m-view" id="v-confirm" hidden>
 <p class="lead"><span data-lang="en">Cancel your renewal? You'll keep BoxedIn until <b data-f="renews"></b>. After that, your sticker stops working.</span><span data-lang="es" hidden>¿Cancelar su renovación? Conservará BoxedIn hasta el <b data-f="renews"></b>. Después, su calcomanía deja de funcionar.</span></p>
-<p class="m-err" data-err hidden></p>
+<p class="m-err" data-err role="alert" hidden></p>
 <button type="button" class="btn-orange" data-act="cancel_renewal"><span data-lang="en">Yes, cancel renewal</span><span data-lang="es" hidden>Sí, cancelar renovación</span></button>
 <button type="button" class="btn-outline" data-go="active"><span data-lang="en">Keep my membership</span><span data-lang="es" hidden>Conservar mi membresía</span></button>
 </section>
@@ -55,7 +57,7 @@
 <!-- 3c. Renewal canceled -->
 <section class="m-view" id="v-canceled" hidden>
 <p class="lead"><span data-lang="en">Your renewal is canceled. You'll keep BoxedIn until <b data-f="renews"></b>. We've emailed you a confirmation.</span><span data-lang="es" hidden>Su renovación está cancelada. Conservará BoxedIn hasta el <b data-f="renews"></b>. Le enviamos una confirmación por correo electrónico.</span></p>
-<p class="m-err" data-err hidden></p>
+<p class="m-err" data-err role="alert" hidden></p>
 <button type="button" class="btn-orange" data-act="resume_renewal"><span data-lang="en">Turn renewal back on</span><span data-lang="es" hidden>Activar la renovación de nuevo</span></button>
 </section>
 
@@ -63,20 +65,20 @@
 <section class="m-view" id="v-first" hidden>
 <p class="lead"><span data-lang="en">Your first charge is on <b data-f="first"></b>. Cancel now and you'll never be charged.</span><span data-lang="es" hidden>Su primer cobro es el <b data-f="first"></b>. Si cancela ahora, nunca se le cobrará.</span></p>
 <p data-founder hidden><span data-lang="en">You'll also give up your Founding Member number and founder pricing. Spots that are given up never reopen.</span><span data-lang="es" hidden>También renunciará a su número de Miembro Fundador y a su precio de fundador. Los lugares cedidos nunca se reabren.</span></p>
-<p class="m-err" data-err hidden></p>
+<p class="m-err" data-err role="alert" hidden></p>
 <button type="button" class="btn-orange" data-act="cancel_first"><span data-lang="en">Cancel my membership</span><span data-lang="es" hidden>Cancelar mi membresía</span></button>
 </section>
 
 <!-- 3e. Within 14 days of a higher charge -->
 <section class="m-view" id="v-refund" hidden>
 <p class="lead"><span data-lang="en">You were charged the new price on <b data-f="charged"></b>. Until <b data-f="refunduntil"></b>, you can cancel and get a prorated refund of <b data-f="refund"></b>.</span><span data-lang="es" hidden>Se le cobró el nuevo precio el <b data-f="charged"></b>. Hasta el <b data-f="refunduntil"></b>, puede cancelar y recibir un reembolso proporcional de <b data-f="refund"></b>.</span></p>
-<p class="m-err" data-err hidden></p>
+<p class="m-err" data-err role="alert" hidden></p>
 <button type="button" class="btn-orange" data-act="refund_cancel"><span data-lang="en">Cancel and refund</span><span data-lang="es" hidden>Cancelar y reembolsar</span></button>
 </section>
 <!-- 3f. A payment didn't go through (11-07-2026, migration 0056; wording approved by Wanda 11-06-2026) -->
 <section class="m-view" id="v-failed" hidden>
 <p class="lead"><span data-lang="en">Your last payment didn't go through. Update your card by <b data-f="payby"></b> to keep BoxedIn. Your sticker keeps working until then.</span><span data-lang="es" hidden>Su último pago no se pudo procesar. Actualice su tarjeta antes del <b data-f="payby"></b> para conservar BoxedIn. Su calcomanía sigue funcionando hasta esa fecha.</span></p>
-<p class="m-err" data-err hidden></p>
+<p class="m-err" data-err role="alert" hidden></p>
 <button type="button" class="btn-orange" data-act="update_card"><span data-lang="en">Update my card</span><span data-lang="es" hidden>Actualizar mi tarjeta</span></button>
 <p data-founder hidden><span data-lang="en">You'll also give up your Founding Member number and founder pricing. Spots that are given up never reopen.</span><span data-lang="es" hidden>También renunciará a su número de Miembro Fundador y a su precio de fundador. Los lugares cedidos nunca se reabren.</span></p>
 <button type="button" class="btn-outline" data-go="confirmfailed"><span data-lang="en">Cancel my membership</span><span data-lang="es" hidden>Cancelar mi membresía</span></button>
@@ -85,7 +87,7 @@
 <section class="m-view" id="v-confirmfailed" hidden>
 <p class="lead"><span data-lang="en">Cancel your membership? Your sticker stops working right away. You won't be charged.</span><span data-lang="es" hidden>¿Cancelar su membresía? Su calcomanía deja de funcionar de inmediato. No se le cobrará.</span></p>
 <p data-founder hidden><span data-lang="en">You'll also give up your Founding Member number and founder pricing. Spots that are given up never reopen.</span><span data-lang="es" hidden>También renunciará a su número de Miembro Fundador y a su precio de fundador. Los lugares cedidos nunca se reabren.</span></p>
-<p class="m-err" data-err hidden></p>
+<p class="m-err" data-err role="alert" hidden></p>
 <button type="button" class="btn-orange" data-act="cancel_failed"><span data-lang="en">Yes, cancel my membership</span><span data-lang="es" hidden>Sí, cancelar mi membresía</span></button>
 <button type="button" class="btn-outline" data-go="failed"><span data-lang="en">Keep my membership</span><span data-lang="es" hidden>Conservar mi membresía</span></button>
 </section>
@@ -115,7 +117,7 @@
 <footer><nav><a href='/terms'>Terms</a><a href='/privacy'>Privacy</a><a href='/refunds'>Refunds &amp; Cancellation</a><a href="/accessibility">Accessibility</a><a href='/contact'>Contact</a></nav>
 <p>&copy; 2026 BoxedIn LLC, a New York limited liability company. Questions: <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</p><p>BoxedIn is a trademark of BoxedIn LLC.</p></footer>
 </div>
-<script src="/site.js?v=11-03-2026"></script>
+<script src="/site.js?v=11-13-2026"></script>
 <script>
 BoxedIn.initLang();
 (function () {
@@ -131,8 +133,8 @@ BoxedIn.initLang();
   function day(iso, l) { if (!iso) return ""; var p = iso.slice(0, 10).split("-").map(Number); return l === "es" ? p[2] + " de " + MES[p[1] - 1] + " de " + p[0] : MEN[p[1] - 1] + " " + p[2] + ", " + p[0]; }
   function usd(c) { return "$" + Math.floor(c / 100).toLocaleString("en-US") + "." + String(c % 100).padStart(2, "0"); }
   function show(id) { document.querySelectorAll(".m-view").forEach(function (v) { v.hidden = v.id !== "v-" + id; }); clearErr(); }
-  function clearErr() { document.querySelectorAll("[data-err]").forEach(function (e) { e.hidden = true; e.textContent = ""; }); }
-  function err(key) { var v = document.querySelector(".m-view:not([hidden]) [data-err]"); if (v) { v.textContent = MSG[lang()][key]; v.hidden = false; } }
+  function clearErr() { document.querySelectorAll("[data-err]").forEach(function (e) { e.hidden = true; e.textContent = ""; }); document.querySelectorAll(".m-field[aria-invalid]").forEach(function (f) { f.removeAttribute("aria-invalid"); }); }
+  function err(key) { var v = document.querySelector(".m-view:not([hidden]) [data-err]"); if (v) { v.textContent = MSG[lang()][key]; v.hidden = false; var f = v.parentNode.querySelector(".m-field"); if (f) { v.id = f.id + "-err"; f.setAttribute("aria-invalid", "true"); f.setAttribute("aria-describedby", v.id); } } }
   function fill(name, en, es) { document.querySelectorAll('[data-f="' + name + '"]').forEach(function (b) { b.textContent = b.closest('[data-lang="es"]') ? es : en; }); }
   function fillDate(name, iso) { fill(name, day(iso, "en"), day(iso, "es")); }
   function busy(b, on) { if (b) b.disabled = on; }
@@ -213,4 +215,5 @@ BoxedIn.initLang();
   });
 })();
 </script>
+<script>BoxedIn.watchViews(".m-view", true);</script>
 </body></html>
