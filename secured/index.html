@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your spot is secured | BoxedIn</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="/style.css?v=11-03-2026"><link rel="icon" href="/favicon.ico?v=11-12-2026" sizes="48x48"><link rel="icon" href="/favicon-32.png?v=11-12-2026" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=11-12-2026"><meta property="og:image" content="https://boxedinnyc.com/share-card.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://boxedinnyc.com/share-card.png">
+<!-- Back from Stripe after the card is saved (11-12-2026). Row 16 APPROVED by Wanda 11-12-2026.
+     The founder number comes from the server (given when Stripe confirms the card). Until it arrives, or if this tab
+     no longer holds the sign-in, the page shows row 16 without the "No. [N]" sentence (DRAFT cut, waits for approval). -->
+</head><body class=""><div class="wrap">
+<header class="top"><a class="brand" href="/" aria-label="BoxedIn home"><picture><source srcset="/logo/boxedin_logo_on_dark.svg" media="(prefers-color-scheme: dark)"><img src="/logo/boxedin_logo_on_light.svg" alt="BoxedIn. Scan. Don't Honk." width="240" height="62"></picture><sup class="tm">&trade;</sup></a>
+<div class="lang-pill" role="group" aria-label="Language / Idioma"><button type="button" data-switch="en" aria-pressed="true" aria-label="English"><span>EN</span></button><button type="button" data-switch="es" aria-pressed="false" aria-label="Español"><span>ES</span></button></div></header>
+<span data-title-en="Your spot is secured | BoxedIn" data-title-es="Su lugar está asegurado | BoxedIn" hidden></span>
+<main aria-live="polite">
+<div data-lang="en">
+<h1 class="oz">Your spot is secured.</h1>
+<p class="lead"><span class="n-line" hidden>You're Founding Member No. <b class="n"></b>. </span>You won't be charged today. We'll email you the moment the BoxedIn app is ready, so you can finish sign-up.</p>
+</div>
+<div data-lang="es" hidden>
+<h1 class="oz">Su lugar está asegurado.</h1>
+<p class="lead"><span class="n-line" hidden>Usted es Miembro Fundador N.º <b class="n"></b>. </span>No se le cobrará hoy. Le enviaremos un correo en cuanto la aplicación BoxedIn esté lista para que termine su inscripción.</p>
+</div>
+</main>
+<footer><nav><a href='/terms'>Terms</a><a href='/privacy'>Privacy</a><a href='/refunds'>Refunds &amp; Cancellation</a><a href="/accessibility">Accessibility</a><a href='/contact'>Contact</a></nav>
+<p>&copy; 2026 BoxedIn LLC, a New York limited liability company. Questions: <a href="mailto:support@boxedinnyc.com">support@boxedinnyc.com</a>.</p><p>BoxedIn is a trademark of BoxedIn LLC.</p></footer>
+</div>
+<script src="/site.js?v=11-03-2026"></script>
+<script>
+BoxedIn.initLang();
+(function () {
+  var token = null;
+  try { token = sessionStorage.getItem("bx_res_token"); } catch (e) {}
+  if (!token) return;
+  var tries = 0;
+  function check() {
+    tries++;
+    fetch(BoxedIn.API + "/functions/v1/reserve", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token, apikey: BoxedIn.KEY }, body: JSON.stringify({ action: "status" }) })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (s) {
+        if (s && s.status === "reserved" && typeof s.founding_number === "number") {
+          document.querySelectorAll(".n").forEach(function (el) { el.textContent = s.founding_number; });
+          document.querySelectorAll(".n-line").forEach(function (el) { el.hidden = false; });
+          try { sessionStorage.removeItem("bx_res_form"); } catch (e) {}
+          return;
+        }
+        if (tries < 10) setTimeout(check, 1500);   // Stripe's notice can take a few seconds
+      }).catch(function () { if (tries < 10) setTimeout(check, 1500); });
+  }
+  check();
+})();
+</script>
+</body></html>
