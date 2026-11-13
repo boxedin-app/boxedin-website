@@ -135,6 +135,7 @@ BoxedIn.initLang();
   function show(id) { document.querySelectorAll(".m-view").forEach(function (v) { v.hidden = v.id !== "v-" + id; }); clearErr(); }
   function clearErr() { document.querySelectorAll("[data-err]").forEach(function (e) { e.hidden = true; e.textContent = ""; }); document.querySelectorAll(".m-field[aria-invalid]").forEach(function (f) { f.removeAttribute("aria-invalid"); }); }
   function err(key) { var v = document.querySelector(".m-view:not([hidden]) [data-err]"); if (v) { v.textContent = MSG[lang()][key]; v.hidden = false; var f = v.parentNode.querySelector(".m-field"); if (f) { v.id = f.id + "-err"; f.setAttribute("aria-invalid", "true"); f.setAttribute("aria-describedby", v.id); } } }
+  document.addEventListener("input", function (e) { if (e.target.classList && e.target.classList.contains("m-field") && e.target.getAttribute("aria-invalid")) clearErr(); });
   function fill(name, en, es) { document.querySelectorAll('[data-f="' + name + '"]').forEach(function (b) { b.textContent = b.closest('[data-lang="es"]') ? es : en; }); }
   function fillDate(name, iso) { fill(name, day(iso, "en"), day(iso, "es")); }
   function busy(b, on) { if (b) b.disabled = on; }
