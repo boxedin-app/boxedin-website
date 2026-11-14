@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap');
+/* Fonts hosted on boxedinnyc.com (11-13-2026, Wanda's rule): never load fonts from Google Fonts or any outside service. Oswald, SIL Open Font License, see /fonts/OFL-Oswald.txt */
+@font-face{font-family:'Oswald';font-style:normal;font-weight:500 700;font-display:swap;src:url('/fonts/oswald-latin-500-700.woff2') format('woff2')}
 :root{--canvas:#F7F4EF;--surface:#FFFFFF;--raised:#EFEAE2;--text:#14161A;--secondary:#5A5650;--hairline:#E4DED3;--orange:#FF6A13;--ink:#14161A;--btnText:#F7F4EF}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--canvas:#14161A;--surface:#1F2228;--raised:#2A2D34;--text:#F7F4EF;--secondary:#B5AFA5;--hairline:#343740;--btnText:#F7F4EF}}
 :root[data-theme="dark"]{--canvas:#14161A;--surface:#1F2228;--raised:#2A2D34;--text:#F7F4EF;--secondary:#B5AFA5;--hairline:#343740}

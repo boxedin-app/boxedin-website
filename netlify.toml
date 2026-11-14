@@ -79,6 +79,13 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
 # Scan pages: never cached by a browser, never sent as a referrer, never indexed.
+# Fonts hosted on our own site (11-13-2026). Cached for a year. If a font file ever changes,
+# give it a NEW file name and update style.css and residents/index.html (never replace in place).
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 [[headers]]
   for = "/s/*"
   [headers.values]
