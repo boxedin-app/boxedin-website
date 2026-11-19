@@ -8,16 +8,30 @@
   to = "/s/index.html"
   status = 200
 
-# 11-18-2026 (approved by Wanda): the app is live, so /waitlist now goes to the "The wait is over" page /start.
+# 11-18-2026 (approved by Wanda): the app is live, so /waitlist now goes to the homepage, which has the App Store button.
+# /start (a separate "wait is over" page) was retired the same night so there is one live page to maintain.
 # The Mailchimp waitlist page stays live as the Android "Get notified" list, linked from /start.
 # Waitlist (11-03-2026, approved by Wanda): the permanent address printed on flyers and QR codes.
 # It forwards to the current sign-up form. If the form ever moves, change only the "to" line;
 # every printed QR keeps working. 302 (temporary) on purpose, so browsers never remember the old target.
 [[redirects]]
   from = "/waitlist"
-  to = "/start"
+  to = "/"
   status = 302
   force = true
+
+[[redirects]]
+  from = "/start"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/start/*"
+  to = "/"
+  status = 301
+  force = true
+
 
 # Scan Spot store links (11-08-2026, approved by Wanda). 4 store codes, printed on the Scan Spot counter flyer QR codes.
 # 11-18-2026 (Wanda): the first partner fell through; the printed flyers carry no store name and are reused for new Scan Spots.
