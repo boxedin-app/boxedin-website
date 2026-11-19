@@ -19,56 +19,56 @@
   status = 302
   force = true
 
-# Scan Spot store links (11-08-2026, approved by Wanda): Total Wireless, 4 Bronx stores.
-# Each store has its own PERMANENT address, printed on its counter flyer QR code. Never remove or reuse these.
-# Before launch they forward to the Total Wireless waitlist page (Mailchimp, auto-tag "Scan Spot: Total Wireless").
+# Scan Spot store links (11-08-2026, approved by Wanda). 4 store codes, printed on the Scan Spot counter flyer QR codes.
+# 11-18-2026 (Wanda): the first partner fell through; the printed flyers carry no store name and are reused for new Scan Spots.
+# They forward to the ScanSpot sign-up page (Mailchimp, mailchi.mp/boxedinnyc/scanspot). Never delete these addresses.
 # After launch, change only the "to" lines (e.g. to app sign-up carrying the store code). Printed QR codes keep working.
 # Store 1 YQA5SP, Store 2 SK6QVH, Store 3 2B7W9Z, Store 4 NXKXWX. Lowercase versions forward too.
 [[redirects]]
   from = "/spot/YQA5SP"
-  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  to = "https://mailchi.mp/boxedinnyc/scanspot"
   status = 302
   force = true
 
 [[redirects]]
   from = "/spot/yqa5sp"
-  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  to = "https://mailchi.mp/boxedinnyc/scanspot"
   status = 302
   force = true
 
 [[redirects]]
   from = "/spot/SK6QVH"
-  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  to = "https://mailchi.mp/boxedinnyc/scanspot"
   status = 302
   force = true
 
 [[redirects]]
   from = "/spot/sk6qvh"
-  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  to = "https://mailchi.mp/boxedinnyc/scanspot"
   status = 302
   force = true
 
 [[redirects]]
   from = "/spot/2B7W9Z"
-  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  to = "https://mailchi.mp/boxedinnyc/scanspot"
   status = 302
   force = true
 
 [[redirects]]
   from = "/spot/2b7w9z"
-  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  to = "https://mailchi.mp/boxedinnyc/scanspot"
   status = 302
   force = true
 
 [[redirects]]
   from = "/spot/NXKXWX"
-  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  to = "https://mailchi.mp/boxedinnyc/scanspot"
   status = 302
   force = true
 
 [[redirects]]
   from = "/spot/nxkxwx"
-  to = "https://mailchi.mp/boxedinnyc/total-wireless"
+  to = "https://mailchi.mp/boxedinnyc/scanspot"
   status = 302
   force = true
 
