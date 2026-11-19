@@ -217,4 +217,6 @@
   if(token)follow(); else start();
 })();</script>
 <script>BoxedIn.watchViews("main > section", false);</script>
+<script>/* 11-19-2026: "Get your own sticker" goes straight to the App Store on iPhone (one tap to download and sign up). Android and computers keep the homepage, which has the Android "Get notified" list. */
+(function(){if(/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)){document.querySelectorAll(".sticker-cta a").forEach(function(a){a.href="https://apps.apple.com/us/app/boxedin-scan-dont-honk/id6830254968";});}})();</script>
 </body></html>
