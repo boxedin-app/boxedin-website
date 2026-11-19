@@ -217,4 +217,10 @@
   if(token)follow(); else start();
 })();</script>
 <script>BoxedIn.watchViews("main > section", false);</script>
+<script>/* 11-19-2026 (Wanda): "Get your own sticker" sends each phone to its next step in one tap.
+iPhone: the App Store. Android: the Android "Get notified" list (the app is iPhone only for now). Computers: the homepage (link unchanged). */
+(function(){var ua=navigator.userAgent||"",to=null;
+if(/iPhone|iPad|iPod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1))to="https://apps.apple.com/us/app/boxedin-scan-dont-honk/id6830254968";
+else if(/Android/i.test(ua))to="https://mailchi.mp/boxedinnyc/waitlist";
+if(to)document.querySelectorAll(".sticker-cta a").forEach(function(a){a.href=to;});})();</script>
 </body></html>
