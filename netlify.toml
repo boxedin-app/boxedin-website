@@ -8,12 +8,14 @@
   to = "/s/index.html"
   status = 200
 
+# 11-18-2026 (approved by Wanda): the app is live, so /waitlist now goes to the "The wait is over" page /start.
+# The Mailchimp waitlist page stays live as the Android "Get notified" list, linked from /start.
 # Waitlist (11-03-2026, approved by Wanda): the permanent address printed on flyers and QR codes.
 # It forwards to the current sign-up form. If the form ever moves, change only the "to" line;
 # every printed QR keeps working. 302 (temporary) on purpose, so browsers never remember the old target.
 [[redirects]]
   from = "/waitlist"
-  to = "https://mailchi.mp/boxedinnyc/waitlist"
+  to = "/start"
   status = 302
   force = true
 
