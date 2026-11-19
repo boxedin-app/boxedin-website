@@ -10,7 +10,7 @@
 
 # 11-18-2026 (approved by Wanda): the app is live, so /waitlist now goes to the homepage, which has the App Store button.
 # /start (a separate "wait is over" page) was retired the same night so there is one live page to maintain.
-# The Mailchimp waitlist page stays live as the Android "Get notified" list, linked from /start.
+# The Mailchimp waitlist page stays live as the Android "Get notified" list, linked from the homepage.
 # Waitlist (11-03-2026, approved by Wanda): the permanent address printed on flyers and QR codes.
 # It forwards to the current sign-up form. If the form ever moves, change only the "to" line;
 # every printed QR keeps working. 302 (temporary) on purpose, so browsers never remember the old target.
